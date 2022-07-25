@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.IBCompSciIA">
         <activity
+            android:name=".Controllers.NavigationActivity"
+            android:exported="false" />
+        <activity
             android:name=".Controllers.ChatActivity"
             android:exported="false" />
         <activity
@@ -19,7 +22,7 @@
             android:name=".Controllers.AddEventActivity"
             android:exported="false" />
         <activity
-            android:name=".Controllers.LoginActivity"
+            android:name=".Controllers.CreateAccountActivity"
             android:exported="false" />
         <activity
             android:name=".Controllers.MainActivity"
