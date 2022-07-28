@@ -1,4 +1,8 @@
 package com.example.ibcompsciia.Models;
 
-public class Parent {
+import java.util.ArrayList;
+
+public class Parent extends User{
+    private String graduatingYear;
+    private ArrayList<String> parentUIDs;
 }

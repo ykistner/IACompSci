@@ -7,10 +7,11 @@
         <entry key="app/src/main/res/drawable/blue_button.xml" value="0.17395833333333333" />
         <entry key="app/src/main/res/drawable/half_white_background.xml" value="0.321025641025641" />
         <entry key="app/src/main/res/drawable/half_white_background2.xml" value="0.321025641025641" />
-        <entry key="app/src/main/res/layout/activity_add_event.xml" value="0.14375" />
-        <entry key="app/src/main/res/layout/activity_login.xml" value="0.14375" />
-        <entry key="app/src/main/res/layout/activity_main.xml" value="0.14447463768115942" />
-        <entry key="app/src/main/res/layout/activity_navigation.xml" value="0.15070921985815602" />
+        <entry key="app/src/main/res/layout/activity_add_event.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/activity_create_account.xml" value="0.165" />
+        <entry key="app/src/main/res/layout/activity_login.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.165" />
+        <entry key="app/src/main/res/layout/activity_navigation.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_sign_up.xml" value="0.165" />
         <entry key="app/src/main/res/layout/activity_view_event.xml" value="0.14375" />
       </map>

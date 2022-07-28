@@ -1,4 +1,4 @@
 package com.example.ibcompsciia.Models;
 
-public class Teacher {
+public class Teacher extends User{
 }

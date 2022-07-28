@@ -8,10 +8,11 @@
     tools:context=".Controllers.MainActivity">
 
     <Button
-        android:id="@+id/button4"
+        android:id="@+id/mainLoginButton"
         android:layout_width="299dp"
         android:layout_height="55dp"
         android:background="@drawable/white_button"
+        android:onClick="mainLoginButton"
         android:text="Log Into Account"
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -21,31 +22,32 @@
         app:layout_constraintVertical_bias="0.849" />
 
     <Button
-        android:id="@+id/button5"
+        android:id="@+id/mainSignupButton"
         android:layout_width="299dp"
         android:layout_height="55dp"
         android:background="@drawable/blue_button"
-        android:text="Button"
+        android:onClick="mainSignupButton"
+        android:text="Create An Account"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.501"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button4"
+        app:layout_constraintTop_toBottomOf="@+id/mainLoginButton"
         app:layout_constraintVertical_bias="0.443" />
 
     <TextView
         android:id="@+id/textView4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Service Made Easy"
+        android:text="Welcome!"
         android:textSize="28dp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/button4"
+        app:layout_constraintBottom_toTopOf="@+id/mainLoginButton"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.304" />
+        app:layout_constraintVertical_bias="0.366" />
 
     <TextView
         android:id="@+id/textView5"
@@ -56,18 +58,35 @@
         android:gravity="center"
         android:text="The i-CAP app is a unique app-based program developed by Yuuto Kistner in order to which brings organisation and productivity to ensure for the i-CAP service group's success"
         android:textSize="16sp"
-        app:layout_constraintBottom_toTopOf="@+id/button4"
+        app:layout_constraintBottom_toTopOf="@+id/mainLoginButton"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.486"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView4"
-        app:layout_constraintVertical_bias="0.142" />
+        app:layout_constraintVertical_bias="0.066" />
 
     <ImageView
-        android:id="@+id/imageView2"
-        android:layout_width="319dp"
-        android:layout_height="121dp"
-        android:layout_marginTop="16dp"
+        android:id="@+id/imageView5"
+        android:layout_width="188dp"
+        android:layout_height="183dp"
+        app:layout_constraintBottom_toTopOf="@+id/mainLoginButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView5"
+        app:layout_constraintVertical_bias="0.4"
+        app:srcCompat="@drawable/icap_code" />
+
+    <ImageView
+        android:id="@+id/imageView10"
+        android:layout_width="288dp"
+        android:layout_height="169dp"
+        app:layout_constraintBottom_toTopOf="@+id/textView4"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/logo"
-        tools:layout_editor_absoluteX="46dp" />
+        app:layout_constraintVertical_bias="0.533"
+        app:srcCompat="@drawable/ss" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

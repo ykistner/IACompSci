@@ -1,4 +1,4 @@
 package com.example.ibcompsciia.Models;
 
-public class Alumni {
+public class Alumni extends User{
 }
