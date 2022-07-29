@@ -8,12 +8,14 @@
         <entry key="app/src/main/res/drawable/half_white_background.xml" value="0.321025641025641" />
         <entry key="app/src/main/res/drawable/half_white_background2.xml" value="0.321025641025641" />
         <entry key="app/src/main/res/layout/activity_add_event.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/activity_chat.xml" value="0.22916666666666666" />
         <entry key="app/src/main/res/layout/activity_create_account.xml" value="0.165" />
+        <entry key="app/src/main/res/layout/activity_event_profile.xml" value="0.23278985507246377" />
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.165" />
         <entry key="app/src/main/res/layout/activity_navigation.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_sign_up.xml" value="0.165" />
-        <entry key="app/src/main/res/layout/activity_view_event.xml" value="0.14375" />
+        <entry key="app/src/main/res/layout/activity_view_event.xml" value="0.165" />
       </map>
     </option>
   </component>
@@ -22,5 +24,12 @@
   </component>
   <component name="ProjectType">
     <option name="id" value="Android" />
+  </component>
+  <component name="VisualizationToolProject">
+    <option name="state">
+      <ProjectState>
+        <option name="scale" value="0.22916666666666666" />
+      </ProjectState>
+    </option>
   </component>
 </project>
