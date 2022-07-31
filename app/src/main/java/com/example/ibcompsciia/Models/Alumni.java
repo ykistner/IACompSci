@@ -8,6 +8,10 @@ public class Alumni extends User{
         this.graduateYear = graduateYear;
     }
 
+    public Alumni(String uid, String nameString, String emailString, int gradYearInt) {
+        super(uid, nameString, emailString, gradYearInt);
+    }
+
     public int getGraduateYear() {
         return graduateYear;
     }

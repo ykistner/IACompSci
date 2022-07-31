@@ -36,15 +36,15 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.993"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayoutCreateUser"
+        app:layout_constraintTop_toBottomOf="@+id/createAccountLinearLayout"
         app:layout_constraintVertical_bias="0.75" />
 
     <Spinner
-        android:id="@+id/selectTypeSpinnerspinner"
+        android:id="@+id/createAccountSpinner"
         android:layout_width="409dp"
         android:layout_height="15dp"
         android:background="@drawable/half_white_background"
-        app:layout_constraintBottom_toTopOf="@+id/linearLayoutCreateUser"
+        app:layout_constraintBottom_toTopOf="@+id/createAccountLinearLayout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
@@ -52,7 +52,7 @@
         app:layout_constraintVertical_bias="0.106" />
 
     <LinearLayout
-        android:id="@+id/linearLayoutCreateUser"
+        android:id="@+id/createAccountLinearLayout"
         android:layout_width="348dp"
         android:layout_height="496dp"
         android:layout_marginStart="32dp"
@@ -63,7 +63,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.526"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/selectTypeSpinnerspinner"
+        app:layout_constraintTop_toBottomOf="@+id/createAccountSpinner"
         app:layout_constraintVertical_bias="0.319">
 
     </LinearLayout>
@@ -90,7 +90,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/button6"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayoutCreateUser"
+        app:layout_constraintTop_toBottomOf="@+id/createAccountLinearLayout"
         app:layout_constraintVertical_bias="0.652" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

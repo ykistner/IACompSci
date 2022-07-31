@@ -17,6 +17,12 @@ public class User {
         this.participationCount = participationCount;
     }
 
+    public User(String uid, String nameString, String emailString, int gradYearInt) {
+    }
+
+    public User(String uid, String nameString, String emailString, String adminCodeString) {
+    }
+
     public String getUid() {
         return uid;
     }
