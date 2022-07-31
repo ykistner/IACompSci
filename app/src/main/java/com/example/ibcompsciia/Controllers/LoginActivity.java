@@ -123,28 +123,9 @@ public class LoginActivity extends AppCompatActivity {
 //        });
     }
 
-    public void signUp(View v) {
-        Intent intent = new Intent(this, CreateAccountActivity.class);
-        startActivity(intent);
-//        System.out.println("Sign Up");
-//        String emailString = emailField.getText().toString();
-//        String passwordString = passwordField.getText().toString();
-//
-//        mAuth.createUserWithEmailAndPassword(emailString, passwordString).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-//            @Override
-//            public void onComplete(@NonNull Task<AuthResult> task) {
-//                if (task.isSuccessful()) {
-//                    Log.d("SIGN UP", "Successfully signed up the user");
-//
-//                    FirebaseUser user = mAuth.getCurrentUser();
-//                    updateUI(user);
-//                } else {
-//                    Log.w("Sign up", "createUserWithEmail:failure", task.getException());
-//                    updateUI(null);
-//                }
-//            }
-//        });
-//
+    public void loginSignUpButton(View v) {
+        Intent nextScreen = new Intent(getBaseContext(), CreateAccountActivity.class);
+        startActivity(nextScreen);
     }
 
     public void updateUI(FirebaseUser currentUser) {

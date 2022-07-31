@@ -16,6 +16,7 @@ import android.widget.Toast;
 
 import com.example.ibcompsciia.Models.Admin;
 import com.example.ibcompsciia.Models.Alumni;
+import com.example.ibcompsciia.Models.Constants;
 import com.example.ibcompsciia.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -136,6 +137,27 @@ public class CreateAccountActivity extends AppCompatActivity {
             Admin newUser = new Admin(uid, nameString, emailString, adminCodeString);
             uidGenerator++;
             firestore.collection("people").document(uid).set(newUser);
+            mAuth.createUserWithEmailAndPassword(emailString, passwordString)
+                    .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                        @Override
+                        public void onComplete(@NonNull Task<AuthResult> task) {
+                            if(task.isSuccessful() && adminCodeString.equals(Constants.ADMIN_CODE)) {
+                                Log.d("SIGN UP", "successfully signed up the user");
+                                FirebaseUser user = mAuth.getCurrentUser();
+                                updateUI(user);
+                            }
+                            else if(!adminCodeString.equals(Constants.ADMIN_CODE)){
+                                Log.d("SIGN UP", "admin code doesn't match");
+                                Toast.makeText(CreateAccountActivity.this,"Admin Code Doesn't Match", Toast.LENGTH_LONG).show();
+                                updateUI(null);
+                            }
+                            else {
+                                Log.d("SIGN UP", "createUserWithEmail:failure", task.getException());
+                                Toast.makeText(CreateAccountActivity.this,"Sign up failed", Toast.LENGTH_LONG).show();
+                                updateUI(null);
+                            }
+                        }
+                    });
         }
     }
 

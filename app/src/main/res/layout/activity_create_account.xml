@@ -64,6 +64,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="48dp"
         android:background="@drawable/blue_button"
+        android:onClick="signUp"
         android:text="Create An Account"
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"

@@ -12,4 +12,5 @@ public class Constants {
     public static final String OWNER_HINT = "Owner";
     public static final String MODEL_HINT = "Model";
     public static final String BASE_PRICE_HINT = "Base Price";
+    public static final String ADMIN_CODE = "abc123";
 }
