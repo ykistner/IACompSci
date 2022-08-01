@@ -2,13 +2,16 @@ package com.example.ibcompsciia.Controllers;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.example.ibcompsciia.Models.BakeSale;
 import com.example.ibcompsciia.Models.Constants;
@@ -17,9 +20,14 @@ import com.example.ibcompsciia.Models.Meeting;
 import com.example.ibcompsciia.Models.Presentation;
 import com.example.ibcompsciia.Models.VolunteerWork;
 import com.example.ibcompsciia.R;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.util.ArrayList;
+import java.util.UUID;
 
 public class AddEventActivity extends AppCompatActivity {
 
@@ -138,8 +146,7 @@ public class AddEventActivity extends AppCompatActivity {
         layout.addView(eventLocationField);
     }
 
-    public void addVehicle(View v) {
-
+        public void addEvents(View v) {
         //generate + get new key
         DocumentReference newRideRef = firestore.collection(Constants.EVENT_COLLECTION).document();
         String eventId = newRideRef.getId();
@@ -175,5 +182,10 @@ public class AddEventActivity extends AppCompatActivity {
         System.out.println(newEvent);
         //add the new event to the database
         newRideRef.set(newEvent);
+
+        Toast.makeText(AddEventActivity.this,"Successfully Added Event", Toast.LENGTH_LONG).show();
+
+        Intent intent = new Intent(this,NavigationActivity.class);
+        startActivity(intent);
     }
 }

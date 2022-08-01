@@ -110,22 +110,22 @@ public class CreateAccountActivity extends AppCompatActivity {
         String nameString = nameField.getText().toString();
         String emailString = emailField.getText().toString();
         String passwordString = passwordField.getText().toString();
-        mAuth.createUserWithEmailAndPassword(emailString, passwordString)
-                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if(task.isSuccessful()) {
-                            Log.d("SIGN UP", "successfully signed up the user");
-                            FirebaseUser user = mAuth.getCurrentUser();
-                            updateUI(user);
-                        }
-                        else {
-                            Log.d("SIGN UP", "createUserWithEmail:failure", task.getException());
-                            Toast.makeText(CreateAccountActivity.this,"Sign up failed", Toast.LENGTH_LONG).show();
-                            updateUI(null);
-                        }
-                    }
-                });
+//        mAuth.createUserWithEmailAndPassword(emailString, passwordString)
+//                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+//                    @Override
+//                    public void onComplete(@NonNull Task<AuthResult> task) {
+//                        if(task.isSuccessful()) {
+//                            Log.d("SIGN UP", "successfully signed up the user");
+//                            FirebaseUser user = mAuth.getCurrentUser();
+//                            updateUI(user);
+//                        }
+//                        else {
+//                            Log.d("SIGN UP", "createUserWithEmail:failure", task.getException());
+//                            Toast.makeText(CreateAccountActivity.this,"Sign up failed", Toast.LENGTH_LONG).show();
+//                            updateUI(null);
+//                        }
+//                    }
+//                });
         if(selectedRole.equals("Alumni")) {
             int gradYearInt = Integer.parseInt(gradYearField.getText().toString());
             Alumni newUser = new Alumni(uid, nameString, emailString, gradYearInt);
@@ -145,11 +145,6 @@ public class CreateAccountActivity extends AppCompatActivity {
                                 Log.d("SIGN UP", "successfully signed up the user");
                                 FirebaseUser user = mAuth.getCurrentUser();
                                 updateUI(user);
-                            }
-                            else if(!adminCodeString.equals(Constants.ADMIN_CODE)){
-                                Log.d("SIGN UP", "admin code doesn't match");
-                                Toast.makeText(CreateAccountActivity.this,"Admin Code Doesn't Match", Toast.LENGTH_LONG).show();
-                                updateUI(null);
                             }
                             else {
                                 Log.d("SIGN UP", "createUserWithEmail:failure", task.getException());

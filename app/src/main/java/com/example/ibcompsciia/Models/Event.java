@@ -63,6 +63,9 @@ public class Event implements Serializable, Parcelable {
     public Event(String eventNameString, String eventStartString, String eventEndString, String eventLocation, int eventCapacity, EditText cause, String eventId) {
     }
 
+    public Event(EditText eventNameField, EditText eventStartField, EditText eventEndField, EditText eventCapacityField, EditText eventLocationField, EditText cause) {
+    }
+
     public boolean isOpen() {
         return open;
     }
