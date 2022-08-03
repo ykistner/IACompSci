@@ -14,8 +14,9 @@ public class Event implements Serializable, Parcelable {
     private String eventId;
     private int capacity;
     private boolean open;
+    private String eventLocation;
 
-    public Event(String eventName, String eventType, String startTime, String endTime, String eventId, int capacity, boolean open) {
+    public Event(String eventName, String eventType, String startTime, String endTime, String eventId, int capacity, boolean open, String eventLocation) {
         this.eventName = eventName;
         this.eventType = eventType;
         this.startTime = startTime;
@@ -23,6 +24,7 @@ public class Event implements Serializable, Parcelable {
         this.eventId = eventId;
         this.capacity = capacity;
         this.open = open;
+        this.eventLocation = eventLocation;
     }
 
     protected Event(Parcel in) {
@@ -33,6 +35,7 @@ public class Event implements Serializable, Parcelable {
         endTime = in.readString();
         eventId = in.readString();
         open = in.readByte() != 0;
+        eventLocation = in.readString();
         
     }
 
@@ -54,9 +57,6 @@ public class Event implements Serializable, Parcelable {
     public Event(String eventName, String eventType, String startTime, String endTime, String eventId, int capacity) {
     }
 
-    public Event(String eventName, String eventType, String startTime, String endTime, String eventId, int capacity, boolean bringBakedGoods, String lunchOrBreak) {
-    }
-
     public Event(String eventNameString, String eventStartString, String eventEndString, String eventLocation, int eventCapacity, String requiredBakedGoodsString, String eventId) {
     }
 
@@ -64,6 +64,10 @@ public class Event implements Serializable, Parcelable {
     }
 
     public Event(EditText eventNameField, EditText eventStartField, EditText eventEndField, EditText eventCapacityField, EditText eventLocationField, EditText cause) {
+    }
+
+    public void setEventLocation(String eventLocation) {
+        this.eventLocation = eventLocation;
     }
 
     public boolean isOpen() {
@@ -149,5 +153,9 @@ public class Event implements Serializable, Parcelable {
         dest.writeString(endTime);
         dest.writeString(eventId);
         dest.writeByte((byte) (open ? 1 : 0));
+    }
+
+    public String getEventLocation() {
+        return getEventLocation();
     }
 }
