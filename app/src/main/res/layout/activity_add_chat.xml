@@ -4,51 +4,45 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background"
-    tools:context=".Controllers.ViewEventActivity">
+    android:background="@drawable/background">
 
     <TextView
-        android:id="@+id/textView18"
+        android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="16dp"
-        android:text="Upcoming Events"
+        android:gravity="center_horizontal"
+        android:text="Add Message"
         android:textColor="#ffffff"
         android:textSize="30sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.44"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.068" />
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/eventRecView"
-        android:layout_width="355dp"
-        android:layout_height="407dp"
-        android:background="@drawable/half_white_background"
-        app:layout_constraintBottom_toTopOf="@+id/button9"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView18"
-        app:layout_constraintVertical_bias="0.27" />
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout2"
+        android:layout_width="354dp"
+        android:layout_height="420dp"
+        android:background="@drawable/half_white_background"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toTopOf="@+id/button17"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView"></LinearLayout>
 
     <Button
-        android:id="@+id/button9"
+        android:id="@+id/button17"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/blue_button"
-        android:onClick="getEvent"
-        android:text="Refresh"
-        android:textSize="16sp"
+        android:text="Add Message"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/eventRecView"
-        app:layout_constraintVertical_bias="0.128" />
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout2" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

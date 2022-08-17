@@ -148,8 +148,8 @@ public class AddEventActivity extends AppCompatActivity {
 
         public void addEvents(View v) {
         //generate + get new key
-        DocumentReference newRideRef = firestore.collection(Constants.EVENT_COLLECTION).document();
-        String eventId = newRideRef.getId();
+        DocumentReference newEventRef = firestore.collection(Constants.EVENT_COLLECTION).document();
+        String eventId = newEventRef.getId();
 
         //make new event according to selected vehicle type
         Event newEvent = null;
@@ -181,11 +181,11 @@ public class AddEventActivity extends AppCompatActivity {
         }
         System.out.println(newEvent);
         //add the new event to the database
-        newRideRef.set(newEvent);
+        newEventRef.set(newEvent);
 
         Toast.makeText(AddEventActivity.this,"Successfully Added Event", Toast.LENGTH_LONG).show();
 
-        Intent intent = new Intent(this,NavigationActivity.class);
-        startActivity(intent);
+//        Intent intent = new Intent(this,NavigationActivity.class);
+//        startActivity(intent);
     }
 }

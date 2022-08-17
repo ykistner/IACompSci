@@ -22,7 +22,7 @@ public class NavigationActivity extends AppCompatActivity {
     }
 
     public void goToChat(View v) {
-        Intent nextScreen = new Intent(getBaseContext(), ChatActivity.class);
+        Intent nextScreen = new Intent(getBaseContext(), AddChatActivity.class);
         startActivity(nextScreen);
     }
 

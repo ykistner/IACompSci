@@ -51,7 +51,7 @@ public class Event implements Serializable, Parcelable {
         }
     };
 
-    public Event(String eventNameString, String eventStartString, String eventEndString, String eventLocation, int eventCapacity, EditText topic, EditText organizer, String eventId) {
+    public Event(String eventNameString, String eventStartString, String eventEndString, String eventLocation, int eventCapacity, String topic, String organizer, String eventId) {
     }
 
     public Event(String eventName, String eventType, String startTime, String endTime, String eventId, int capacity) {
@@ -60,10 +60,13 @@ public class Event implements Serializable, Parcelable {
     public Event(String eventNameString, String eventStartString, String eventEndString, String eventLocation, int eventCapacity, String requiredBakedGoodsString, String eventId) {
     }
 
-    public Event(String eventNameString, String eventStartString, String eventEndString, String eventLocation, int eventCapacity, EditText cause, String eventId) {
+    public Event(String eventNameString, String eventStartString, String eventEndString, String eventLocation, String eventCapacity, String cause, String eventId) {
     }
 
     public Event(EditText eventNameField, EditText eventStartField, EditText eventEndField, EditText eventCapacityField, EditText eventLocationField, EditText cause) {
+    }
+
+    public Event(String eventNameString, String eventStartString, String eventEndString, String eventLocation, int eventCapacity, EditText cause, String eventId) {
     }
 
     public void setEventLocation(String eventLocation) {
@@ -126,6 +129,10 @@ public class Event implements Serializable, Parcelable {
         this.capacity = capacity;
     }
 
+    public String getEventLocation() {
+        return eventLocation;
+    }
+
     @Override
     public String toString() {
         return "Event{" +
@@ -153,9 +160,5 @@ public class Event implements Serializable, Parcelable {
         dest.writeString(endTime);
         dest.writeString(eventId);
         dest.writeByte((byte) (open ? 1 : 0));
-    }
-
-    public String getEventLocation() {
-        return getEventLocation();
     }
 }

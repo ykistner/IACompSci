@@ -14,6 +14,8 @@ import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.example.ibcompsciia.Models.Event;
+import com.example.ibcompsciia.Models.User;
 import com.example.ibcompsciia.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -83,44 +85,40 @@ public class LoginActivity extends AppCompatActivity {
         myCars.add("Tesla"); myCars.add("Toyota"); myCars.add("BMW");
         myCars.add("Audi"); myCars.add("Mercedes"); myCars.add("VW");
 
-        ArrayList<String> myRidersUID = new ArrayList<>();
-        myRidersUID.add(UUID.randomUUID().toString());
+        ArrayList<String> myEventsUID = new ArrayList<>();
+        myEventsUID.add(UUID.randomUUID().toString());
 
-//        User thisUser = new User(UUID.randomUUID().toString(), "Yuuto Kistner", "Yuuto_Kistner@fis.edu", "Student", 2, myCars);
-//        Vehicle thisVehicle = new Vehicle("Tom Mayock", "Audi Q5", 4, UUID.randomUUID().toString(), myRidersUID, true, "SUV", 7.99);
-//
-//        User thatUser = new User(UUID.randomUUID().toString(), "Rikuto Kimura", "Rikuto_Kimura@fis.edu", "Student", 4, myCars);
-//        Vehicle thatVehicle = new Vehicle("Kagan Angin", "Ford Fiesta", 3, UUID.randomUUID().toString(), myRidersUID, true, "Hatchback", 5.99);
+        User thisUser = new User(UUID.randomUUID().toString(),"Yuuto", "Yuuto_Kistner@fis.edu", 2023);
+        Event thisEvent = new Event("Annual Bake Sale", "10:00", "11:00", "Auditorium", 4, "Cookies", UUID.randomUUID().toString());
+
+        User thatUser = new User(UUID.randomUUID().toString(),"Abc", "Abc@fis.edu", 2024);
+        Event thatEvent = new Event("Annual Bake Sale", "11:00", "12:00", "Cafeteria", 2, "Brownies", UUID.randomUUID().toString());
 
 
-//        firestore.collection("everyones-items").document("kistner").collection("User").document(thisUser.getUid()).set(thisUser);
-//        firestore.collection("everyones-items").document("kistner").collection("Vehicle").document(thisVehicle.getVehicleID()).set(thisVehicle);
-//
-//        firestore.collection("everyones-items/kistner/User").document(thatUser.getUid()).set(thatUser);
-//        firestore.collection("everyones-items/kistner/Vehicle").document(thatVehicle.getVehicleID()).set(thatVehicle);
-//
-//        firestore.collection("everyones-items").document("chandler").collection("books").document(thisUser.getUid()).set(thisUser);
-//
-//        Log.d("KISTNER_TEST", "ID to look for: " + thatUser.getUid());
-//
-//        firestore.collection("everyones-items/kistner/User").document(thatUser.getUid()).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-//            @Override
-//            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-//                if(task.isSuccessful()){
-//                    DocumentSnapshot ds = task.getResult();
-//
-//                    Vehicle myVehicle = ds.toObject(Vehicle.class);
-//                    User myUser = ds.toObject(User.class);
-//
-////                    Log.d("KISTNER_TEST_VEHICLEMODEL", myVehicle.getModel());
-////                    Log.d("KISTNER_TEXT_USERNAME: ", myUser.getName());
-//
-//                }
-//                else{
-//
-//                }
-//            }
-//        });
+        firestore.collection("everyones-items").document("kistner").collection("User").document(thisUser.getUid()).set(thisUser);
+        firestore.collection("everyones-items").document("kistner").collection("Event").document(thisEvent.getEventId()).set(thisEvent);
+
+        firestore.collection("everyones-items/kistner/User").document(thatUser.getUid()).set(thatUser);
+        firestore.collection("everyones-items/kistner/Event").document(thatEvent.getEventId()).set(thatEvent);
+
+        firestore.collection("everyones-items").document("chandler").collection("books").document(thisUser.getUid()).set(thisUser);
+
+        Log.d("KISTNER_TEST", "ID to look for: " + thatUser.getUid());
+
+        firestore.collection("everyones-items/kistner/User").document(thatUser.getUid()).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if(task.isSuccessful()){
+                    DocumentSnapshot ds = task.getResult();
+
+                    Event myEvent = ds.toObject(Event.class);
+                    User myUser = ds.toObject(User.class);
+                }
+                else{
+
+                }
+            }
+        });
     }
 
     public void loginSignUpButton(View v) {
