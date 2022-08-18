@@ -4,14 +4,34 @@ import android.widget.EditText;
 
 public class Meeting extends Event{
     private boolean mandatory;
+    private String topic;
+    private String organizer;
 
-    public Meeting(String eventName, String eventType, String startTime, String endTime, String eventId, int capacity, boolean mandatory) {
-        super(eventName, eventType, startTime, endTime, eventId, capacity, mandatory);
+    public Meeting(String eventName, String eventType, String startTime, String endTime, int capacity, String topic, String organizer, boolean mandatory, String eventId) {
+        super(eventName, startTime, eventType, endTime, capacity, eventId);
         this.mandatory = mandatory;
+        this.topic = topic;
+        this.organizer = organizer;
     }
 
-    public Meeting(String eventNameString, String eventStartString, String eventEndString, String eventLocation, int eventCapacity, EditText topic, EditText organizer, String eventId) {
-        super(eventNameString, eventStartString, eventEndString, eventLocation, eventCapacity, topic, organizer, eventId);
+    public Meeting(String eventNameString, String eventStartString, String eventEndString, String eventLocation, int eventCapacity, EditText topic, EditText organizer, boolean mandatory, String eventId) {
+        super(eventNameString, eventStartString, eventEndString, eventLocation, eventCapacity,eventId);
+    }
+
+    public String getTopic() {
+        return topic;
+    }
+
+    public void setTopic(String topic) {
+        this.topic = topic;
+    }
+
+    public String getOrganizer() {
+        return organizer;
+    }
+
+    public void setOrganizer(String organizer) {
+        this.organizer = organizer;
     }
 
     public boolean isMandatory() {
@@ -26,6 +46,8 @@ public class Meeting extends Event{
     public String toString() {
         return "Meeting{" +
                 "mandatory=" + mandatory +
+                ", topic='" + topic + '\'' +
+                ", organizer='" + organizer + '\'' +
                 '}';
     }
 }

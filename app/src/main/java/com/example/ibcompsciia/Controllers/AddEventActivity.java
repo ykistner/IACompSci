@@ -49,6 +49,7 @@ public class AddEventActivity extends AppCompatActivity {
     private EditText organizer;
     private EditText topic;
     private EditText cause;
+    private boolean mandatory;
 
 
     @Override
@@ -66,7 +67,7 @@ public class AddEventActivity extends AppCompatActivity {
     }
 
     private void setupSpinner() {
-        String[] eventTypes = {"Bake Sale", "Meeting", "Presentation", "Volunteer Work"};
+        String[] eventTypes = {Constants.BAKESALE, Constants.MEETING, Constants.PRESENTATION, Constants.VOLUNTEER};
         // add user types to spinner
         ArrayAdapter<String> langArrAdapter = new ArrayAdapter<String>(AddEventActivity.this,
                 android.R.layout.simple_spinner_item, eventTypes);
@@ -91,13 +92,13 @@ public class AddEventActivity extends AppCompatActivity {
 
     private void addFields(){
         commonFields();
-        if(selectedRole.equals("Bake Sale")) {
+        if(selectedRole.equals(Constants.BAKESALE)) {
             requiredBakedGoods = new EditText(this);
             requiredBakedGoods.setHint("Baked Goods That Are Needed");
             layout.addView(requiredBakedGoods);
 
         }
-        if(selectedRole.equals("Meeting")) {
+        if(selectedRole.equals(Constants.MEETING)) {
             topic = new EditText(this);
             topic.setHint("Topic");
             layout.addView(topic);
@@ -106,7 +107,7 @@ public class AddEventActivity extends AppCompatActivity {
             organizer.setHint("Organizer");
             layout.addView(organizer);
         }
-        if(selectedRole.equals("Presentation")) {
+        if(selectedRole.equals(Constants.PRESENTATION)) {
             topic = new EditText(this);
             topic.setHint("Topic");
             layout.addView(topic);
@@ -115,7 +116,7 @@ public class AddEventActivity extends AppCompatActivity {
             organizer.setHint("Organizer");
             layout.addView(organizer);
         }
-        if(selectedRole.equals("Volunteer Work")) {
+        if(selectedRole.equals(Constants.VOLUNTEER)) {
             cause = new EditText(this);
             cause.setHint("Cause");
             layout.addView(cause);
@@ -151,7 +152,7 @@ public class AddEventActivity extends AppCompatActivity {
         DocumentReference newEventRef = firestore.collection(Constants.EVENT_COLLECTION).document();
         String eventId = newEventRef.getId();
 
-        //make new event according to selected vehicle type
+        //make new event according to selected event type
         Event newEvent = null;
 
         //get data from form
@@ -168,24 +169,33 @@ public class AddEventActivity extends AppCompatActivity {
         else if(selectedRole.equals(Constants.MEETING)) {
             String topicString = new String(topic.getText().toString());
             String organizerString = new String(organizer.getText().toString());
-            newEvent = new Meeting(eventNameString, eventStartString, eventEndString, eventLocation, eventCapacity, topic, organizer, eventId);
+            newEvent = new Meeting(eventNameString, eventStartString, eventEndString, eventLocation, eventCapacity, topicString, organizerString, mandatory, eventId);
         }
         else if(selectedRole.equals(Constants.PRESENTATION)) {
             String topicString = new String(topic.getText().toString());
             String organizerString = new String(organizer.getText().toString());
-            newEvent = new Presentation(eventNameString, eventStartString, eventEndString, eventLocation, eventCapacity, topic, organizer, eventId);
+            newEvent = new Presentation(eventNameString, eventStartString, eventEndString, eventLocation, eventCapacity, topicString, organizerString,  eventId);
         }
         else if(selectedRole.equals(Constants.VOLUNTEER)) {
             String causeString = new String(cause.getText().toString());
-            newEvent = new VolunteerWork(eventNameString, eventStartString, eventEndString, eventLocation, eventCapacity, cause, eventId);
+            newEvent = new VolunteerWork(eventNameString, eventStartString, eventEndString, eventLocation, eventCapacity, causeString, eventId);
+        }
+        else {
+            newEvent = new Event(eventNameString, eventStartString, eventEndString, eventLocation, eventCapacity, cause, eventId);
         }
         System.out.println(newEvent);
         //add the new event to the database
-        newEventRef.set(newEvent);
+            try{
+                newEventRef.set(newEvent);
+            }
+            catch(Exception e) {
+                e.printStackTrace();
+            }
+
 
         Toast.makeText(AddEventActivity.this,"Successfully Added Event", Toast.LENGTH_LONG).show();
 
-//        Intent intent = new Intent(this,NavigationActivity.class);
-//        startActivity(intent);
+        Intent intent = new Intent(this,NavigationActivity.class);
+        startActivity(intent);
     }
 }

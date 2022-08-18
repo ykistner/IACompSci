@@ -79,46 +79,6 @@ public class LoginActivity extends AppCompatActivity {
                 }
             }
         });
-
-
-        ArrayList<String> myCars = new ArrayList<>();
-        myCars.add("Tesla"); myCars.add("Toyota"); myCars.add("BMW");
-        myCars.add("Audi"); myCars.add("Mercedes"); myCars.add("VW");
-
-        ArrayList<String> myEventsUID = new ArrayList<>();
-        myEventsUID.add(UUID.randomUUID().toString());
-
-        User thisUser = new User(UUID.randomUUID().toString(),"Yuuto", "Yuuto_Kistner@fis.edu", 2023);
-        Event thisEvent = new Event("Annual Bake Sale", "10:00", "11:00", "Auditorium", 4, "Cookies", UUID.randomUUID().toString());
-
-        User thatUser = new User(UUID.randomUUID().toString(),"Abc", "Abc@fis.edu", 2024);
-        Event thatEvent = new Event("Annual Bake Sale", "11:00", "12:00", "Cafeteria", 2, "Brownies", UUID.randomUUID().toString());
-
-
-        firestore.collection("everyones-items").document("kistner").collection("User").document(thisUser.getUid()).set(thisUser);
-        firestore.collection("everyones-items").document("kistner").collection("Event").document(thisEvent.getEventId()).set(thisEvent);
-
-        firestore.collection("everyones-items/kistner/User").document(thatUser.getUid()).set(thatUser);
-        firestore.collection("everyones-items/kistner/Event").document(thatEvent.getEventId()).set(thatEvent);
-
-        firestore.collection("everyones-items").document("chandler").collection("books").document(thisUser.getUid()).set(thisUser);
-
-        Log.d("KISTNER_TEST", "ID to look for: " + thatUser.getUid());
-
-        firestore.collection("everyones-items/kistner/User").document(thatUser.getUid()).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                if(task.isSuccessful()){
-                    DocumentSnapshot ds = task.getResult();
-
-                    Event myEvent = ds.toObject(Event.class);
-                    User myUser = ds.toObject(User.class);
-                }
-                else{
-
-                }
-            }
-        });
     }
 
     public void loginSignUpButton(View v) {

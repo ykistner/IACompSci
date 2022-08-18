@@ -6,11 +6,10 @@ public class Constants {
     public static final String BAKESALE = "BakeSale";
     public static final String MEETING = "Meeting";
     public static final String EVENT_COLLECTION = "EventCollection";
-    public static final String VEHICLE_PACKAGE = "VehiclePackage";
-    public static final String VEHICLE_PATH = "VehiclePath";
-    public static final String CAPACITY_HINT = "Capacity";
-    public static final String OWNER_HINT = "Owner";
-    public static final String MODEL_HINT = "Model";
-    public static final String BASE_PRICE_HINT = "Base Price";
     public static final String ADMIN_CODE = "abc123";
+
+    public static final String ALUMNI = "Alumni";
+    public static final String PARENT = "Parent";
+    public static final String TEACHER = "Teacher";
+    public static final String STUDENT = "Student";
 }

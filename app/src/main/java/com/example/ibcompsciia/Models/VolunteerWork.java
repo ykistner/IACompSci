@@ -10,8 +10,8 @@ public class VolunteerWork extends Event{
         this.mandatory = mandatory;
     }
 
-    public VolunteerWork(String eventNameString, String eventStartString, String eventEndString, String eventLocation, int eventCapacity, EditText cause, String eventId) {
-        super(eventNameString, eventStartString, eventEndString, eventLocation, eventCapacity, cause, eventId);
+    public VolunteerWork(String eventNameString, String eventStartString, String eventEndString, String eventLocation, int eventCapacity, String causeString, String eventId) {
+        super(eventNameString, eventStartString, eventEndString, eventLocation, eventCapacity, eventId, causeString);
     }
 
     public boolean isMandatory() {
