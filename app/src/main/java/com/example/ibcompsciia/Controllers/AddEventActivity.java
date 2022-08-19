@@ -45,6 +45,7 @@ public class AddEventActivity extends AppCompatActivity {
     private EditText eventIdField;
     private EditText eventType;
     private EditText eventCapacityField;
+    private EditText requiredBakedGoodsString;
     private EditText requiredBakedGoods;
     private EditText organizer;
     private EditText topic;
