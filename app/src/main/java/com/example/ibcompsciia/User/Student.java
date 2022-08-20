@@ -1,8 +1,10 @@
-package com.example.ibcompsciia.Models;
+package com.example.ibcompsciia.User;
+
+import com.example.ibcompsciia.User.User;
 
 import java.util.ArrayList;
 
-public class Student extends User{
+public class Student extends User {
     private String graduatingYear;
     private ArrayList<String> parentUIDs;
 

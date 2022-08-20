@@ -14,8 +14,8 @@ import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import com.example.ibcompsciia.Models.Admin;
-import com.example.ibcompsciia.Models.Alumni;
+import com.example.ibcompsciia.User.Admin;
+import com.example.ibcompsciia.User.Alumni;
 import com.example.ibcompsciia.Models.Constants;
 import com.example.ibcompsciia.R;
 import com.google.android.gms.tasks.OnCompleteListener;

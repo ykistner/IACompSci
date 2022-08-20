@@ -1,6 +1,8 @@
-package com.example.ibcompsciia.Models;
+package com.example.ibcompsciia.User;
 
-public class Alumni extends User{
+import com.example.ibcompsciia.User.User;
+
+public class Alumni extends User {
     private int graduateYear;
 
     public Alumni(String uid, String name, String email, String userType, int participationCount, int graduateYear) {

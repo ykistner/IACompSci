@@ -1,8 +1,8 @@
-package com.example.ibcompsciia.Models;
+package com.example.ibcompsciia.Event;
 
-import android.widget.EditText;
+import com.example.ibcompsciia.Event.Event;
 
-public class Presentation extends Event{
+public class Presentation extends Event {
     private int gradeLevel;
 
     public Presentation(String eventName, String startTime, String endTime, String eventLocation, String eventId, int capacity, String topic, String organizer, int gradeLevel) {

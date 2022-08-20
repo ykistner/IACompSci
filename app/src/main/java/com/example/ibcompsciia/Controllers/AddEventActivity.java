@@ -4,7 +4,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -13,21 +12,16 @@ import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import com.example.ibcompsciia.Models.BakeSale;
+import com.example.ibcompsciia.Event.BakeSale;
 import com.example.ibcompsciia.Models.Constants;
-import com.example.ibcompsciia.Models.Event;
-import com.example.ibcompsciia.Models.Meeting;
-import com.example.ibcompsciia.Models.Presentation;
-import com.example.ibcompsciia.Models.VolunteerWork;
+import com.example.ibcompsciia.Event.Event;
+import com.example.ibcompsciia.Event.Meeting;
+import com.example.ibcompsciia.Event.Presentation;
+import com.example.ibcompsciia.Event.VolunteerWork;
 import com.example.ibcompsciia.R;
-import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
-
-import java.util.ArrayList;
-import java.util.UUID;
 
 public class AddEventActivity extends AppCompatActivity {
 
@@ -156,6 +150,7 @@ public class AddEventActivity extends AppCompatActivity {
         //make new event according to selected event type
         Event newEvent = null;
 
+
         //get data from form
         String eventNameString = eventNameField.getText().toString();
         String eventStartString = eventStartField.getText().toString();
@@ -163,9 +158,12 @@ public class AddEventActivity extends AppCompatActivity {
         String eventLocation = eventLocationField.getText().toString();
         int eventCapacity = Integer.parseInt(eventCapacityField.getText().toString());
 
+
+
         if(selectedRole.equals(Constants.BAKESALE)) {
             String requiredBakedGoodsString = new String(requiredBakedGoods.getText().toString());
             newEvent = new BakeSale(eventNameString, eventStartString, eventEndString, eventLocation, eventCapacity, requiredBakedGoodsString, eventId);
+            System.out.println(newEvent);
         }
         else if(selectedRole.equals(Constants.MEETING)) {
             String topicString = new String(topic.getText().toString());

@@ -1,4 +1,4 @@
-package com.example.ibcompsciia.Models;
+package com.example.ibcompsciia.Event;
 
 import android.os.Parcel;
 import android.os.Parcelable;

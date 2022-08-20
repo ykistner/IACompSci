@@ -13,7 +13,7 @@ import android.util.Log;
 import android.view.View;
 
 import com.example.ibcompsciia.Models.Constants;
-import com.example.ibcompsciia.Models.Event;
+import com.example.ibcompsciia.Event.Event;
 import com.example.ibcompsciia.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;

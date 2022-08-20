@@ -7,7 +7,7 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.ibcompsciia.Models.Event;
+import com.example.ibcompsciia.Event.Event;
 import com.example.ibcompsciia.R;
 
 import java.util.ArrayList;

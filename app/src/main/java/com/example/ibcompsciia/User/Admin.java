@@ -1,6 +1,8 @@
-package com.example.ibcompsciia.Models;
+package com.example.ibcompsciia.User;
 
-public class Admin extends User{
+import com.example.ibcompsciia.User.User;
+
+public class Admin extends User {
     private String adminCode;
 
     public Admin(String uid, String name, String email, String userType, int participationCount, String adminCode) {

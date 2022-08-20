@@ -1,4 +1,4 @@
-package com.example.ibcompsciia.Models;
+package com.example.ibcompsciia.Event;
 
 public class BakeSale extends Event {
     private boolean bringBakedGoods;

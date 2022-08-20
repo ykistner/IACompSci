@@ -1,8 +1,10 @@
-package com.example.ibcompsciia.Models;
+package com.example.ibcompsciia.Event;
 
 import android.widget.EditText;
 
-public class Meeting extends Event{
+import com.example.ibcompsciia.Event.Event;
+
+public class Meeting extends Event {
     private boolean mandatory;
     private String topic;
     private String organizer;

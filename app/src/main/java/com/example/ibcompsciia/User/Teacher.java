@@ -1,6 +1,8 @@
-package com.example.ibcompsciia.Models;
+package com.example.ibcompsciia.User;
 
-public class Teacher extends User{
+import com.example.ibcompsciia.User.User;
+
+public class Teacher extends User {
     private String inSchoolTitle;
 
     public Teacher(String uid, String name, String email, String userType, int participationCount, String inSchoolTitle) {

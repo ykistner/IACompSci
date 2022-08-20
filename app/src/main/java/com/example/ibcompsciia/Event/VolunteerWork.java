@@ -1,8 +1,8 @@
-package com.example.ibcompsciia.Models;
+package com.example.ibcompsciia.Event;
 
-import android.widget.EditText;
+import com.example.ibcompsciia.Event.Event;
 
-public class VolunteerWork extends Event{
+public class VolunteerWork extends Event {
     private boolean mandatory;
 
     public VolunteerWork(String eventName, String eventType, String startTime, String endTime, String eventId, int capacity, boolean mandatory) {
