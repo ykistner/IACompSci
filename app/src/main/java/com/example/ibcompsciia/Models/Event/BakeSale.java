@@ -1,17 +1,18 @@
-package com.example.ibcompsciia.Event;
+package com.example.ibcompsciia.Models.Event;
 
 public class BakeSale extends Event {
     private boolean bringBakedGoods;
     private String lunchOrBreak;
 
-    public BakeSale(String eventName, String eventType, String startTime, String endTime, String eventId, int capacity, boolean bringBakedGoods, String lunchOrBreak) {
-        super(eventName, eventType, startTime, endTime, eventId, capacity, bringBakedGoods, lunchOrBreak);
+    public BakeSale(){
         this.bringBakedGoods = bringBakedGoods;
         this.lunchOrBreak = lunchOrBreak;
     }
 
-    public BakeSale(String eventNameString, String eventStartString, String eventEndString, String eventLocation, int eventCapacity, String requiredBakedGoodsString, String eventId) {
-        super(eventNameString, eventStartString, eventEndString, eventLocation, eventCapacity, requiredBakedGoodsString, eventId);
+    public BakeSale(String eventNameString, String eventStartString, String eventEndString, String eventLocation, int eventCapacity, String eventId) {
+        super(eventNameString, "Bake Sale", eventStartString, eventEndString, eventLocation, eventCapacity, eventId);
+        this.bringBakedGoods = true;
+        this.lunchOrBreak = "test";
     }
 
     public boolean isBringBakedGoods() {
@@ -34,7 +35,7 @@ public class BakeSale extends Event {
     public String toString() {
         return "BakeSale{" +
                 "bringBakedGoods=" + bringBakedGoods +
-                ", lunchOrBreak='" + lunchOrBreak + '\'' +
+                ", lunchOrBreak='" + lunchOrBreak + '\'' + super.toString() +
                 '}';
     }
 }

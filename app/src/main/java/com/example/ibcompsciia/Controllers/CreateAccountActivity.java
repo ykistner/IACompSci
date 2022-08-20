@@ -14,9 +14,9 @@ import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import com.example.ibcompsciia.User.Admin;
-import com.example.ibcompsciia.User.Alumni;
-import com.example.ibcompsciia.Models.Constants;
+import com.example.ibcompsciia.Models.User.Admin;
+import com.example.ibcompsciia.Models.User.Alumni;
+import com.example.ibcompsciia.Utils.Constants;
 import com.example.ibcompsciia.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -28,6 +28,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 public class CreateAccountActivity extends AppCompatActivity {
 
     private FirebaseAuth mAuth;
+    private FirebaseUser mUser;
     private FirebaseFirestore firestore;
     private LinearLayout layout;
     private EditText emailField;
@@ -38,7 +39,6 @@ public class CreateAccountActivity extends AppCompatActivity {
     private String selectedRole;
     private String uid;
     private EditText adminCodeField;
-    private static int uidGenerator = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,8 +49,6 @@ public class CreateAccountActivity extends AppCompatActivity {
         layout = findViewById(R.id.createAccountLinearLayout);
         userRoleSpinner = findViewById(R.id.createAccountSpinner);
         setupSpinner();
-        uid = "" + uidGenerator;
-        uidGenerator++;
     }
 
     // setup spinner where user selects what user type they want to make an account for
@@ -63,11 +61,9 @@ public class CreateAccountActivity extends AppCompatActivity {
         userRoleSpinner.setAdapter(langArrAdapter);
 
         //triggered whenever user selects something different
-        userRoleSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener()
-        {
+        userRoleSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id)
-            {
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 selectedRole = parent.getItemAtPosition(position).toString();
                 addFields();
             }
@@ -80,12 +76,12 @@ public class CreateAccountActivity extends AppCompatActivity {
 
     public void addFields() {
         commonFields();
-        if(selectedRole.equals("Alumni")) {
+        if (selectedRole.equals("Alumni")) {
             gradYearField = new EditText(this);
             gradYearField.setHint("Graduation year");
             layout.addView(gradYearField);
         }
-        if(selectedRole.equals("Admin")){
+        if (selectedRole.equals("Admin")) {
             adminCodeField = new EditText(this);
             adminCodeField.setHint("Admin Code");
             layout.addView(adminCodeField);
@@ -111,29 +107,29 @@ public class CreateAccountActivity extends AppCompatActivity {
         String emailString = emailField.getText().toString();
         String passwordString = passwordField.getText().toString();
 
-        if(selectedRole.equals("Alumni")) {
+        //gets userId
+        String userId = mUser.getUid();
+
+        if (selectedRole.equals("Alumni")) {
             int gradYearInt = Integer.parseInt(gradYearField.getText().toString());
             Alumni newUser = new Alumni(uid, nameString, emailString, gradYearInt);
-            uidGenerator++;
             firestore.collection("people").document(uid).set(newUser);
         }
-        if(selectedRole.equals("Admin")){
+        if (selectedRole.equals("Admin")) {
             String adminCodeString = adminCodeField.getText().toString();
             Admin newUser = new Admin(uid, nameString, emailString, adminCodeString);
-            uidGenerator++;
             firestore.collection("people").document(uid).set(newUser);
             mAuth.createUserWithEmailAndPassword(emailString, passwordString)
                     .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
-                            if(task.isSuccessful() && adminCodeString.equals(Constants.ADMIN_CODE)) {
+                            if (task.isSuccessful() && adminCodeString.equals(Constants.ADMIN_CODE)) {
                                 Log.d("SIGN UP", "successfully signed up the user");
                                 FirebaseUser user = mAuth.getCurrentUser();
                                 updateUI(user);
-                            }
-                            else {
+                            } else {
                                 Log.d("SIGN UP", "createUserWithEmail:failure", task.getException());
-                                Toast.makeText(CreateAccountActivity.this,"Sign up failed", Toast.LENGTH_LONG).show();
+                                Toast.makeText(CreateAccountActivity.this, "Sign up failed", Toast.LENGTH_LONG).show();
                                 updateUI(null);
                             }
                         }
@@ -143,7 +139,7 @@ public class CreateAccountActivity extends AppCompatActivity {
 
     public void updateUI(FirebaseUser currentUser) {
         if (currentUser != null) {
-            Intent intent = new Intent(this,NavigationActivity.class);
+            Intent intent = new Intent(this, NavigationActivity.class);
             startActivity(intent);
         }
     }

@@ -31,7 +31,7 @@ public class NavigationActivity extends AppCompatActivity {
         startActivity(nextScreen);
     }
 
-    public void goToAddEvents(View v){
+    public void goToAddEvents(View v) {
         Intent nextScreen = new Intent(getBaseContext(), AddEventActivity.class);
         startActivity(nextScreen);
     }

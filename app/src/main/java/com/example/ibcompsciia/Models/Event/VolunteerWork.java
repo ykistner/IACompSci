@@ -1,6 +1,4 @@
-package com.example.ibcompsciia.Event;
-
-import com.example.ibcompsciia.Event.Event;
+package com.example.ibcompsciia.Models.Event;
 
 public class VolunteerWork extends Event {
     private boolean mandatory;

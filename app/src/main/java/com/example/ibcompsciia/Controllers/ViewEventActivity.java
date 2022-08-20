@@ -11,9 +11,10 @@ import android.os.Bundle;
 import android.os.Parcelable;
 import android.util.Log;
 import android.view.View;
+import android.widget.Toast;
 
-import com.example.ibcompsciia.Models.Constants;
-import com.example.ibcompsciia.Event.Event;
+import com.example.ibcompsciia.Utils.Constants;
+import com.example.ibcompsciia.Models.Event.Event;
 import com.example.ibcompsciia.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -25,7 +26,7 @@ import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 
-public class ViewEventActivity extends AppCompatActivity implements RecyclerAdapter.OnViewClickListener{
+public class ViewEventActivity extends AppCompatActivity implements RecyclerAdapter.OnViewClickListener {
 
     private static final String TAG = "";
     private FirebaseAuth mAuth;
@@ -63,8 +64,7 @@ public class ViewEventActivity extends AppCompatActivity implements RecyclerAdap
                         eventsList.add(document.toObject(Event.class));
                     }
                     getAllEventsTask.setResult(null);
-                }
-                else {
+                } else {
                     Log.d("VehiclesInfoActivity", "Error getting documents from db: ", task.getException());
                 }
             }
@@ -76,6 +76,7 @@ public class ViewEventActivity extends AppCompatActivity implements RecyclerAdap
                 myAdapter = new RecyclerAdapter(eventsList, ViewEventActivity.this);
                 vehicleRecView.setAdapter(myAdapter);
                 vehicleRecView.setLayoutManager(new LinearLayoutManager(ViewEventActivity.this));
+                System.out.println("TESTING");
             }
         });
     }
@@ -87,10 +88,34 @@ public class ViewEventActivity extends AppCompatActivity implements RecyclerAdap
 
     @Override
     public void onViewClick(int position) {
-        System.out.println(position);
-        Intent intent = new Intent(this, EventProfileActivity.class);
-        intent.putExtra("Selected Vehicle" ,(Parcelable) eventsList.get(position));
-        startActivity(intent);
+        TaskCompletionSource<String> getAllRidesTask = new TaskCompletionSource<>();
 
+        firestore.collection(Constants.EVENT_PATH).document(eventsList.get(position).getEventId()).get()
+                .addOnCompleteListener(this,
+                        (task) -> {
+                            if(task.getResult() == null) {
+
+                            }
+                            else if(task.isSuccessful()) {
+
+                                Class c = Event.class;
+                                try {
+                                    c = Class.forName(Constants.EVENTPACKAGE + eventsList.get(position).getEventType());
+                                }
+                                catch (Exception e) {
+                                    e.printStackTrace();
+                                }
+
+                                Event event = (Event) task.getResult().toObject(c);
+
+                                Intent intent = new Intent(this, EventProfileActivity.class);
+                                intent.putExtra(Constants.EVENT_PATH, (Parcelable) event);
+                                startActivity(intent);
+                            }
+                            else {
+                                Log.d(TAG, "Error getting vehicle from the database", task.getException());
+                                Toast.makeText(this, "Error getting vehicle from the database", Toast.LENGTH_SHORT).show();
+                            }
+                        });
     }
 }

@@ -1,4 +1,4 @@
-package com.example.ibcompsciia.Event;
+package com.example.ibcompsciia.Models.Event;
 
 import android.os.Parcel;
 import android.os.Parcelable;
@@ -16,18 +16,10 @@ public class Event implements Serializable, Parcelable {
     private boolean open;
     private String eventLocation;
 
-    public Event(String name, String eventType, String eventName, String startTime, String endTime, String eventLocation, int capacity, String eventId) {
-        this.eventName = eventName;
-        this.eventType = eventType;
-        this.startTime = startTime;
-        this.endTime = endTime;
-        this.eventId = eventId;
-        this.capacity = 0;
-        this.open = true;
-        this.eventLocation = eventLocation;
+    public Event(){
     }
 
-    public Event(String eventName, String eventType, String startTime, String endTime, String eventId, int capacity, String eventLocation) {
+    public Event(String eventName, String eventType, String startTime, String endTime, String eventLocation, int capacity, String eventId) {
         this.eventName = eventName;
         this.eventType = eventType;
         this.startTime = startTime;
@@ -80,8 +72,8 @@ public class Event implements Serializable, Parcelable {
     public Event(String eventNameString, String eventStartString, String eventEndString, String eventLocation, int eventCapacity, EditText cause, String eventId) {
     }
 
-    public Event(String eventName, String startTime, String endTime, String eventLocation, int capacity, String eventId) {
-    }
+//    public Event(String eventName, String startTime, String endTime, String eventLocation, int capacity, String eventId) {
+//    }
 
     public Event(String eventName, String eventType, String startTime, String endTime, String eventId, int capacity, boolean bringBakedGoods, String lunchOrBreak) {
     }

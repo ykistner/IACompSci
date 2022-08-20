@@ -1,4 +1,4 @@
-package com.example.ibcompsciia.session;
+package com.example.ibcompsciia.chatting.session;
 
 import android.content.Context;
 import android.content.SharedPreferences;

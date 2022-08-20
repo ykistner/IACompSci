@@ -1,6 +1,4 @@
-package com.example.ibcompsciia.User;
-
-import com.example.ibcompsciia.User.User;
+package com.example.ibcompsciia.Models.User;
 
 import java.util.ArrayList;
 

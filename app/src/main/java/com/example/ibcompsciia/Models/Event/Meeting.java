@@ -1,23 +1,15 @@
-package com.example.ibcompsciia.Event;
-
-import android.widget.EditText;
-
-import com.example.ibcompsciia.Event.Event;
+package com.example.ibcompsciia.Models.Event;
 
 public class Meeting extends Event {
     private boolean mandatory;
     private String topic;
     private String organizer;
 
-    public Meeting(String eventName, String eventType, String startTime, String endTime, int capacity, String topic, String organizer, boolean mandatory, String eventId) {
-        super(eventName, startTime, eventType, endTime, capacity, eventId);
+    public Meeting(String eventName, String eventType, String startTime, String endTime, int capacity, String topic, String organizer, String eventId) {
+        super(eventName, "Meeting", startTime, eventType, endTime, capacity, eventId);
         this.mandatory = mandatory;
         this.topic = topic;
         this.organizer = organizer;
-    }
-
-    public Meeting(String eventNameString, String eventStartString, String eventEndString, String eventLocation, int eventCapacity, EditText topic, EditText organizer, boolean mandatory, String eventId) {
-        super(eventNameString, eventStartString, eventEndString, eventLocation, eventCapacity,eventId);
     }
 
     public String getTopic() {

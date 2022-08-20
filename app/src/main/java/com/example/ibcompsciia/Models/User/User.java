@@ -1,6 +1,4 @@
-package com.example.ibcompsciia.User;
-
-import java.util.ArrayList;
+package com.example.ibcompsciia.Models.User;
 
 public class User {
     private String uid;

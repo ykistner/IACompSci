@@ -7,7 +7,7 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.ibcompsciia.Event.Event;
+import com.example.ibcompsciia.Models.Event.Event;
 import com.example.ibcompsciia.R;
 
 import java.util.ArrayList;
@@ -35,8 +35,8 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerViewHolder> {
     public void onBindViewHolder(@NonNull RecyclerViewHolder holder, int position) {
         holder.eventNameText(eventList.get(position).getEventName());
         holder.eventStartTimeText(eventList.get(position).getStartTime());
-        holder.eventCapacityText("Capacity: "+ eventList.get(position).getCapacity());
-        holder.eventLocationText("€"+ eventList.get(position).getEventLocation());
+        holder.eventCapacityText("Capacity: " + eventList.get(position).getCapacity());
+        holder.eventLocationText("€" + eventList.get(position).getEventLocation());
     }
 
     @Override
@@ -47,7 +47,6 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerViewHolder> {
     public interface OnViewClickListener {
         void onViewClick(int position);
     }
-
 
 
 }

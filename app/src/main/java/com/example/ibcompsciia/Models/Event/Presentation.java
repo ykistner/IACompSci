@@ -1,6 +1,4 @@
-package com.example.ibcompsciia.Event;
-
-import com.example.ibcompsciia.Event.Event;
+package com.example.ibcompsciia.Models.Event;
 
 public class Presentation extends Event {
     private int gradeLevel;
@@ -11,7 +9,7 @@ public class Presentation extends Event {
     }
 
     public Presentation(String eventNameString, String eventStartString, String eventEndString, String eventLocation, int eventCapacity, String topic, String organizer, String eventId) {
-        super(eventNameString, eventStartString, eventEndString, eventLocation, eventCapacity, eventId);
+        super(eventNameString, "Presentation", eventStartString, eventEndString, eventLocation, eventCapacity, eventId);
     }
 
     public int getGradeLevel() {

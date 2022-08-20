@@ -26,11 +26,11 @@ public class LoginActivity extends AppCompatActivity {
     private EditText passwordField;
 
     @Override
-    public void onStart(){
+    public void onStart() {
         super.onStart();
         // Check if user is signed in (non-null) and update UI accordingly.
         FirebaseUser currentUser = mAuth.getCurrentUser();
-        if(currentUser != null){
+        if (currentUser != null) {
             currentUser.reload();
         }
     }

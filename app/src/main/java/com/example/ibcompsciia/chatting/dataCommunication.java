@@ -5,13 +5,19 @@ public class dataCommunication {
 
     private String from;
     private String message;
-    private String time;
+    private long time;
     private String type;
+    private String date;
 
-    public dataCommunication(String from, String message, String time, String type) {
+    public dataCommunication(){
+    }
+
+    public dataCommunication(String key, String from, String message, String date, long time, String type) {
+        this.key = key;
         this.from = from;
         this.message = message;
         this.time = time;
+        this.date = date;
         this.type = type;
     }
 
@@ -39,11 +45,11 @@ public class dataCommunication {
         this.message = message;
     }
 
-    public String getTime() {
+    public long getTime() {
         return time;
     }
 
-    public void setTime(String time) {
+    public void setTime(long time) {
         this.time = time;
     }
 
@@ -53,5 +59,13 @@ public class dataCommunication {
 
     public void setType(String type) {
         this.type = type;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
     }
 }

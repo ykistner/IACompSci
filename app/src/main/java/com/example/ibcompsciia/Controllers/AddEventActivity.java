@@ -12,12 +12,12 @@ import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import com.example.ibcompsciia.Event.BakeSale;
-import com.example.ibcompsciia.Models.Constants;
-import com.example.ibcompsciia.Event.Event;
-import com.example.ibcompsciia.Event.Meeting;
-import com.example.ibcompsciia.Event.Presentation;
-import com.example.ibcompsciia.Event.VolunteerWork;
+import com.example.ibcompsciia.Models.Event.BakeSale;
+import com.example.ibcompsciia.Utils.Constants;
+import com.example.ibcompsciia.Models.Event.Event;
+import com.example.ibcompsciia.Models.Event.Meeting;
+import com.example.ibcompsciia.Models.Event.Presentation;
+import com.example.ibcompsciia.Models.Event.VolunteerWork;
 import com.example.ibcompsciia.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
@@ -30,22 +30,16 @@ public class AddEventActivity extends AppCompatActivity {
     private LinearLayout layout;
     private Spinner userRoleSpinner;
     private String selectedRole;
-    private String uid;
     private static int uidGenerator = 1;
     private EditText eventNameField;
     private EditText eventStartField;
     private EditText eventEndField;
     private EditText eventLocationField;
-    private EditText eventIdField;
-    private EditText eventType;
     private EditText eventCapacityField;
-    private EditText requiredBakedGoodsString;
     private EditText requiredBakedGoods;
     private EditText organizer;
     private EditText topic;
     private EditText cause;
-    private boolean mandatory;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,8 +51,6 @@ public class AddEventActivity extends AppCompatActivity {
         userRoleSpinner = findViewById(R.id.createAccountSpinner);
 
         setupSpinner();
-        uid = "" + uidGenerator;
-        uidGenerator++;
     }
 
     private void setupSpinner() {
@@ -70,11 +62,9 @@ public class AddEventActivity extends AppCompatActivity {
         userRoleSpinner.setAdapter(langArrAdapter);
 
         //triggered whenever user selects something different
-        userRoleSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener()
-        {
+        userRoleSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id)
-            {
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 selectedRole = parent.getItemAtPosition(position).toString();
                 addFields();
             }
@@ -85,35 +75,35 @@ public class AddEventActivity extends AppCompatActivity {
         });
     }
 
-    private void addFields(){
+    private void addFields() {
         commonFields();
-        if(selectedRole.equals(Constants.BAKESALE)) {
+        if (selectedRole.equals(Constants.BAKESALE)) {
             requiredBakedGoods = new EditText(this);
-            requiredBakedGoods.setHint("Baked Goods That Are Needed");
+            requiredBakedGoods.setHint(Constants.BAKED);
             layout.addView(requiredBakedGoods);
 
         }
-        if(selectedRole.equals(Constants.MEETING)) {
+        if (selectedRole.equals(Constants.MEETING)) {
             topic = new EditText(this);
-            topic.setHint("Topic");
+            topic.setHint(Constants.TOPIC);
             layout.addView(topic);
 
             organizer = new EditText(this);
-            organizer.setHint("Organizer");
+            organizer.setHint(Constants.ORGANIZER);
             layout.addView(organizer);
         }
-        if(selectedRole.equals(Constants.PRESENTATION)) {
+        if (selectedRole.equals(Constants.PRESENTATION)) {
             topic = new EditText(this);
-            topic.setHint("Topic");
+            topic.setHint(Constants.TOPIC);
             layout.addView(topic);
 
             organizer = new EditText(this);
-            organizer.setHint("Organizer");
+            organizer.setHint(Constants.ORGANIZER);
             layout.addView(organizer);
         }
-        if(selectedRole.equals(Constants.VOLUNTEER)) {
+        if (selectedRole.equals(Constants.VOLUNTEER)) {
             cause = new EditText(this);
-            cause.setHint("Cause");
+            cause.setHint(Constants.CAUSE);
             layout.addView(cause);
         }
     }
@@ -122,27 +112,27 @@ public class AddEventActivity extends AppCompatActivity {
         layout.removeAllViewsInLayout();
 
         eventNameField = new EditText(this);
-        eventNameField.setHint("Event Name");
+        eventNameField.setHint(Constants.EVENTNAME);
         layout.addView(eventNameField);
 
         eventStartField = new EditText(this);
-        eventStartField.setHint("Event Start Time");
+        eventStartField.setHint(Constants.STARTTIME);
         layout.addView(eventStartField);
 
         eventEndField = new EditText(this);
-        eventEndField.setHint("Event End Time");
+        eventEndField.setHint(Constants.ENDTIME);
         layout.addView(eventEndField);
 
         eventCapacityField = new EditText(this);
-        eventCapacityField.setHint("Event Capacity");
+        eventCapacityField.setHint(Constants.CAPACITY);
         layout.addView(eventCapacityField);
 
         eventLocationField = new EditText(this);
-        eventLocationField.setHint("Event Location");
+        eventLocationField.setHint(Constants.LOCATION);
         layout.addView(eventLocationField);
     }
 
-        public void addEvents(View v) {
+    public void addEvents(View v) {
         //generate + get new key
         DocumentReference newEventRef = firestore.collection(Constants.EVENT_COLLECTION).document();
         String eventId = newEventRef.getId();
@@ -159,42 +149,38 @@ public class AddEventActivity extends AppCompatActivity {
         int eventCapacity = Integer.parseInt(eventCapacityField.getText().toString());
 
 
-
-        if(selectedRole.equals(Constants.BAKESALE)) {
+        if (selectedRole.equals(Constants.BAKESALE)) {
+            System.out.println("CREATING BAKESALE");
             String requiredBakedGoodsString = new String(requiredBakedGoods.getText().toString());
-            newEvent = new BakeSale(eventNameString, eventStartString, eventEndString, eventLocation, eventCapacity, requiredBakedGoodsString, eventId);
+            newEvent = new BakeSale(eventNameString, eventStartString, eventEndString, eventLocation, eventCapacity, eventId);
             System.out.println(newEvent);
-        }
-        else if(selectedRole.equals(Constants.MEETING)) {
+        } else if (selectedRole.equals(Constants.MEETING)) {
             String topicString = new String(topic.getText().toString());
             String organizerString = new String(organizer.getText().toString());
-            newEvent = new Meeting(eventNameString, eventStartString, eventEndString, eventLocation, eventCapacity, topicString, organizerString, mandatory, eventId);
-        }
-        else if(selectedRole.equals(Constants.PRESENTATION)) {
+            newEvent = new Meeting(eventNameString, eventStartString, eventEndString, eventLocation, eventCapacity, topicString, organizerString, eventId);
+        } else if (selectedRole.equals(Constants.PRESENTATION)) {
             String topicString = new String(topic.getText().toString());
             String organizerString = new String(organizer.getText().toString());
-            newEvent = new Presentation(eventNameString, eventStartString, eventEndString, eventLocation, eventCapacity, topicString, organizerString,  eventId);
-        }
-        else if(selectedRole.equals(Constants.VOLUNTEER)) {
+            newEvent = new Presentation(eventNameString, eventStartString, eventEndString, eventLocation, eventCapacity, topicString, organizerString, eventId);
+        } else if (selectedRole.equals(Constants.VOLUNTEER)) {
             String causeString = new String(cause.getText().toString());
             newEvent = new VolunteerWork(eventNameString, eventStartString, eventEndString, eventLocation, eventCapacity, causeString, eventId);
-        }
-        else {
+        } else {
             newEvent = new Event(eventNameString, eventStartString, eventEndString, eventLocation, eventCapacity, cause, eventId);
         }
         System.out.println(newEvent);
         //add the new event to the database
-            try{
-                newEventRef.set(newEvent);
-            }
-            catch(Exception e) {
-                e.printStackTrace();
-            }
+        try {
+            System.out.println("HAPPENS");
+            newEventRef.set(newEvent);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
 
-        Toast.makeText(AddEventActivity.this,"Successfully Added Event", Toast.LENGTH_LONG).show();
+        Toast.makeText(AddEventActivity.this, "Successfully Added Event", Toast.LENGTH_LONG).show();
 
-        Intent intent = new Intent(this,NavigationActivity.class);
+        Intent intent = new Intent(this, NavigationActivity.class);
         startActivity(intent);
     }
 }
