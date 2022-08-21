@@ -16,6 +16,9 @@ import android.widget.Toast;
 
 import com.example.ibcompsciia.Models.User.Admin;
 import com.example.ibcompsciia.Models.User.Alumni;
+import com.example.ibcompsciia.Models.User.Parent;
+import com.example.ibcompsciia.Models.User.Student;
+import com.example.ibcompsciia.Models.User.Teacher;
 import com.example.ibcompsciia.Utils.Constants;
 import com.example.ibcompsciia.R;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -23,13 +26,17 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.util.ArrayList;
 
 public class CreateAccountActivity extends AppCompatActivity {
 
     private FirebaseAuth mAuth;
     private FirebaseUser mUser;
     private FirebaseFirestore firestore;
+    private FirebaseAuth.AuthStateListener mAuthListener;
     private LinearLayout layout;
     private EditText emailField;
     private EditText passwordField;
@@ -39,6 +46,10 @@ public class CreateAccountActivity extends AppCompatActivity {
     private String selectedRole;
     private String uid;
     private EditText adminCodeField;
+    private String nameString;
+    private EditText textInSchoolTitle;
+    private EditText textChildrenUIDs;
+    private EditText graduatingYearField;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,7 +64,7 @@ public class CreateAccountActivity extends AppCompatActivity {
 
     // setup spinner where user selects what user type they want to make an account for
     private void setupSpinner() {
-        String[] userTypes = {"Student", "Teacher", "Alumni", "Parent", "Admin"};
+        String[] userTypes = {Constants.STUDENT, Constants.TEACHER, Constants.ALUMNI, Constants.PARENT, Constants.ADMIN};
         // add user types to spinner
         ArrayAdapter<String> langArrAdapter = new ArrayAdapter<String>(CreateAccountActivity.this,
                 android.R.layout.simple_spinner_item, userTypes);
@@ -81,10 +92,25 @@ public class CreateAccountActivity extends AppCompatActivity {
             gradYearField.setHint("Graduation year");
             layout.addView(gradYearField);
         }
+        if(selectedRole.equals("Student")){
+            graduatingYearField = new EditText(this);
+            graduatingYearField.setHint("Graduating Year");
+            layout.addView(graduatingYearField);
+        }
         if (selectedRole.equals("Admin")) {
             adminCodeField = new EditText(this);
             adminCodeField.setHint("Admin Code");
             layout.addView(adminCodeField);
+        }
+        if(selectedRole.equals("Teacher")){
+            textInSchoolTitle = new EditText(this);
+            textInSchoolTitle.setHint("In School Title");
+            layout.addView(textInSchoolTitle);
+        }
+        if(selectedRole.equals("Parent")){
+            textChildrenUIDs = new EditText(this);
+            textChildrenUIDs.setHint("Children User ID");
+            layout.addView(textChildrenUIDs);
         }
     }
 
@@ -107,39 +133,74 @@ public class CreateAccountActivity extends AppCompatActivity {
         String emailString = emailField.getText().toString();
         String passwordString = passwordField.getText().toString();
 
-        //gets userId
-        String userId = mUser.getUid();
-
-        if (selectedRole.equals("Alumni")) {
-            int gradYearInt = Integer.parseInt(gradYearField.getText().toString());
-            Alumni newUser = new Alumni(uid, nameString, emailString, gradYearInt);
-            firestore.collection("people").document(uid).set(newUser);
-        }
-        if (selectedRole.equals("Admin")) {
-            String adminCodeString = adminCodeField.getText().toString();
-            Admin newUser = new Admin(uid, nameString, emailString, adminCodeString);
-            firestore.collection("people").document(uid).set(newUser);
-            mAuth.createUserWithEmailAndPassword(emailString, passwordString)
-                    .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                        @Override
-                        public void onComplete(@NonNull Task<AuthResult> task) {
-                            if (task.isSuccessful() && adminCodeString.equals(Constants.ADMIN_CODE)) {
-                                Log.d("SIGN UP", "successfully signed up the user");
-                                FirebaseUser user = mAuth.getCurrentUser();
-                                updateUI(user);
-                            } else {
-                                Log.d("SIGN UP", "createUserWithEmail:failure", task.getException());
-                                Toast.makeText(CreateAccountActivity.this, "Sign up failed", Toast.LENGTH_LONG).show();
-                                updateUI(null);
-                            }
+        mAuth.createUserWithEmailAndPassword(emailString, passwordString)
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if(task.isSuccessful()) {
+                            //saveUser(emailString,passwordString,nameString);
+                            Log.d(Constants.SIGN_UP, Constants.SIGN_UP_SUCCESS);
+                            FirebaseUser user = mAuth.getCurrentUser();
+                            finish();
+                            updateUI(user);
+                            mUser = mAuth.getCurrentUser();
+                            uid = mUser.getUid();
+                            addUserToDatabase(emailString);
                         }
-                    });
+                        else {
+                            Log.d(Constants.SIGN_UP, Constants.SIGN_UP_FAILURE, task.getException());
+                            Toast.makeText(CreateAccountActivity.this,Constants.SIGN_UP_FAILURE_TOAST, Toast.LENGTH_LONG).show();
+                            updateUI(null);
+                        }
+                    }
+                });
+    }
+
+    public void addUserToDatabase(String emailString) {
+        if(selectedRole.equals(Constants.ALUMNI)) {
+            int gradYearInt = Integer.parseInt(gradYearField.getText().toString());
+            Alumni newUser = new Alumni(uid, nameString, emailString, "Alumni", 10, gradYearInt);
+            //add the new user to the database
+            firestore.collection(Constants.USER_COLLECTION).document(uid).set(newUser);
+        }
+        if(selectedRole.equals(Constants.TEACHER)) {
+            String inSchoolTitle = textInSchoolTitle.getText().toString();
+            Teacher newUser = new Teacher(uid, nameString, emailString, "Teacher", 10, inSchoolTitle);
+            //add the new user to the database
+            firestore.collection(Constants.USER_COLLECTION).document(uid).set(newUser);
+        }
+        if(selectedRole.equals(Constants.ADMIN)){
+            String adminCodeString = adminCodeField.getText().toString();
+            Admin newUser = new Admin(uid, nameString, emailString, "Admin", 10, adminCodeString);
+            firestore.collection(Constants.USER_COLLECTION).document(uid).set(newUser);
+        }
+        if(selectedRole.equals(Constants.PARENT)){
+            ArrayList<String> childrenUIDs = new ArrayList<>();
+            String childrenUID = textChildrenUIDs.getText().toString();
+            childrenUIDs.add(childrenUID);
+        }
+        if(selectedRole.equals(Constants.STUDENT)){
+            int graduatingYearInt = Integer.parseInt(graduatingYearField.getText().toString());
+            Student newUser = new Student(uid, nameString, emailString, "Student", 10, graduatingYearInt, null);
         }
     }
 
     public void updateUI(FirebaseUser currentUser) {
+        mAuthListener = new FirebaseAuth.AuthStateListener() {
+            @Override
+            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+                FirebaseUser user = firebaseAuth.getCurrentUser();
+                if (user != null) {
+                    UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder().setDisplayName(nameString).build();
+                    user.updateProfile(profileUpdates);
+                } else {
+                    finish();
+                }
+            }
+        };
+        FirebaseAuth.getInstance().addAuthStateListener(mAuthListener);
         if (currentUser != null) {
-            Intent intent = new Intent(this, NavigationActivity.class);
+            Intent intent = new Intent(this, MainActivity.class);
             startActivity(intent);
         }
     }

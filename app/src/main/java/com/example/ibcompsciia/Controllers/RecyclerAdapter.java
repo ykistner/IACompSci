@@ -36,7 +36,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerViewHolder> {
         holder.eventNameText(eventList.get(position).getEventName());
         holder.eventStartTimeText(eventList.get(position).getStartTime());
         holder.eventCapacityText("Capacity: " + eventList.get(position).getCapacity());
-        holder.eventLocationText("€" + eventList.get(position).getEventLocation());
+        holder.eventLocationText("Location: " + eventList.get(position).getEventLocation());
     }
 
     @Override

@@ -18,7 +18,7 @@ public class User {
     public User(String uid, String nameString, String emailString, int gradYearInt) {
     }
 
-    public User(String uid, String nameString, String emailString, String adminCodeString) {
+    public User(String s, String uid, String nameString) {
     }
 
     public String getUid() {

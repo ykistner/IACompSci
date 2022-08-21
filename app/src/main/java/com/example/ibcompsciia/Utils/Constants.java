@@ -15,6 +15,16 @@ public class Constants {
     public static final String PARENT = "Parent";
     public static final String TEACHER = "Teacher";
     public static final String STUDENT = "Student";
+    public static final String ADMIN = "Admin";
+    public static final String USER_COLLECTION = "Users";
+
+    public static final String SIGN_UP = "Sign Up";
+    public static String SIGN_UP_SUCCESS = "Successfully signed up the user";
+    public static String SIGN_UP_FAILURE = "CreateUserWithEmail:failure";
+    public static String SIGN_UP_FAILURE_TOAST = "Sign up failed";
+    public static String SIGN_IN_SUCCESS = "signInWithEmail:success";
+    public static String SIGN_IN_FAILURE = "signInWithEmail:failure";
+    public static String SIGN_IN_FAILURE_TOAST = "Authentication failed.";
 
     public static final String BAKED = "Baked Goods That Are Needed";
     public static final String TOPIC = "Topic";

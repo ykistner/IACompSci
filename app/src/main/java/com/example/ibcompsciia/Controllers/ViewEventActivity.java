@@ -88,21 +88,18 @@ public class ViewEventActivity extends AppCompatActivity implements RecyclerAdap
 
     @Override
     public void onViewClick(int position) {
-        TaskCompletionSource<String> getAllRidesTask = new TaskCompletionSource<>();
 
         firestore.collection(Constants.EVENT_PATH).document(eventsList.get(position).getEventId()).get()
                 .addOnCompleteListener(this,
                         (task) -> {
-                            if(task.getResult() == null) {
+                            if (task.getResult() == null) {
 
-                            }
-                            else if(task.isSuccessful()) {
+                            } else if (task.isSuccessful()) {
 
                                 Class c = Event.class;
                                 try {
                                     c = Class.forName(Constants.EVENTPACKAGE + eventsList.get(position).getEventType());
-                                }
-                                catch (Exception e) {
+                                } catch (Exception e) {
                                     e.printStackTrace();
                                 }
 
@@ -111,8 +108,7 @@ public class ViewEventActivity extends AppCompatActivity implements RecyclerAdap
                                 Intent intent = new Intent(this, EventProfileActivity.class);
                                 intent.putExtra(Constants.EVENT_PATH, (Parcelable) event);
                                 startActivity(intent);
-                            }
-                            else {
+                            } else {
                                 Log.d(TAG, "Error getting vehicle from the database", task.getException());
                                 Toast.makeText(this, "Error getting vehicle from the database", Toast.LENGTH_SHORT).show();
                             }

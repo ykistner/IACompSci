@@ -8,10 +8,6 @@ public class Admin extends User {
         this.adminCode = adminCode;
     }
 
-    public Admin(String uid, String nameString, String emailString, String adminCodeString) {
-        super(uid, nameString, emailString, adminCodeString);
-    }
-
     public String getAdminCode() {
         return adminCode;
     }
