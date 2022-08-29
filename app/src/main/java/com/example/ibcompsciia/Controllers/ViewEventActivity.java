@@ -65,7 +65,7 @@ public class ViewEventActivity extends AppCompatActivity implements RecyclerView
                     }
                     getAllEventsTask.setResult(null);
                 } else {
-                    Log.d("VehiclesInfoActivity", "Error getting documents from db: ", task.getException());
+                    Log.d("ViewEventActivity", "Error getting documents from db: ", task.getException());
                 }
             }
         });

@@ -10,7 +10,8 @@ public class BakeSale extends Event {
     }
 
     public BakeSale(String eventNameString, String eventStartString, String eventEndString, String eventLocation, int eventCapacity, String eventId) {
-        super(eventNameString, "Bake Sale", eventStartString, eventEndString, eventLocation, eventCapacity, eventId);
+        super(eventNameString, "Bak" +
+                "eSale", eventStartString, eventEndString, eventLocation, eventCapacity, eventId);
         this.bringBakedGoods = true;
         this.lunchOrBreak = "test";
     }
