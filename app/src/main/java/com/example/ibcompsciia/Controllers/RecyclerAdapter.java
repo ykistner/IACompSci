@@ -15,9 +15,9 @@ import java.util.ArrayList;
 public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerViewHolder> {
 
     private ArrayList<Event> eventList;
-    private OnViewClickListener onViewClickListener;
+    private RecyclerViewHolder.OnViewClickListener onViewClickListener;
 
-    public RecyclerAdapter(ArrayList<Event> eventList, OnViewClickListener onViewClickListener) {
+    public RecyclerAdapter(ArrayList<Event> eventList, RecyclerViewHolder.OnViewClickListener onViewClickListener) {
         this.eventList = eventList;
         this.onViewClickListener = onViewClickListener;
     }
@@ -47,6 +47,4 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerViewHolder> {
     public interface OnViewClickListener {
         void onViewClick(int position);
     }
-
-
 }

@@ -15,9 +15,9 @@ public class RecyclerViewHolder extends RecyclerView.ViewHolder implements View.
     protected TextView eventCapacityText;
     protected TextView eventLocationText;
 
-    private RecyclerAdapter.OnViewClickListener onViewClickListener;
+    private OnViewClickListener onViewClickListener;
 
-    public RecyclerViewHolder(@NonNull View itemView, RecyclerAdapter.OnViewClickListener onViewClickListner) {
+    public RecyclerViewHolder(@NonNull View itemView, OnViewClickListener onViewClickListener) {
         super(itemView);
         this.onViewClickListener = onViewClickListener;
 
@@ -48,5 +48,9 @@ public class RecyclerViewHolder extends RecyclerView.ViewHolder implements View.
     @Override
     public void onClick(View v) {
         onViewClickListener.onViewClick(getAdapterPosition());
+    }
+
+    public interface OnViewClickListener {
+        void onViewClick(int position);
     }
 }

@@ -5,6 +5,7 @@ import android.os.Parcelable;
 import android.widget.EditText;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 public class Event implements Serializable, Parcelable {
     private String eventName;
@@ -15,6 +16,7 @@ public class Event implements Serializable, Parcelable {
     private int capacity;
     private boolean open;
     private String eventLocation;
+    private ArrayList<String> participantsUIDs;
 
     public Event(){
     }
@@ -24,6 +26,20 @@ public class Event implements Serializable, Parcelable {
         this.eventType = eventType;
         this.startTime = startTime;
         this.endTime = endTime;
+        this.eventId = eventId;
+        this.capacity = capacity;
+        this.open = true;
+        this.eventLocation = eventLocation;
+
+        participantsUIDs = new ArrayList<>();
+    }
+
+    public Event(String eventName, String eventType, String startTime, String endTime, ArrayList<String> participantsUIDs, String eventLocation, int capacity, String eventId) {
+        this.eventName = eventName;
+        this.eventType = eventType;
+        this.startTime = startTime;
+        this.endTime = endTime;
+        this.participantsUIDs = participantsUIDs;
         this.eventId = eventId;
         this.capacity = capacity;
         this.open = true;
@@ -39,7 +55,7 @@ public class Event implements Serializable, Parcelable {
         eventId = in.readString();
         open = in.readByte() != 0;
         eventLocation = in.readString();
-        
+        participantsUIDs = in.createStringArrayList();
     }
 
     public static final Creator<Event> CREATOR = new Creator<Event>() {
@@ -140,6 +156,21 @@ public class Event implements Serializable, Parcelable {
 
     public String getEventLocation() {
         return eventLocation;
+    }
+
+    public int getRemainingCapacity(){
+        return (capacity - participantsUIDs.size());
+    }
+
+    public ArrayList<String> getParticipantsUIDs(){ return participantsUIDs; }
+
+    public void setParticipantsUIDs(ArrayList<String> participantsUIDs){
+        this.participantsUIDs = participantsUIDs;
+    }
+
+    public void addReservedUid(String uid){
+        participantsUIDs.add(uid);
+
     }
 
     @Override

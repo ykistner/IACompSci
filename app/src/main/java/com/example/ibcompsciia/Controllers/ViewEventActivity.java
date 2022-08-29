@@ -26,7 +26,7 @@ import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 
-public class ViewEventActivity extends AppCompatActivity implements RecyclerAdapter.OnViewClickListener {
+public class ViewEventActivity extends AppCompatActivity implements RecyclerViewHolder.OnViewClickListener {
 
     private static final String TAG = "";
     private FirebaseAuth mAuth;
