@@ -14,6 +14,7 @@ public class Event implements Serializable, Parcelable {
     private String endTime;
     private String eventId;
     private int capacity;
+    private int remainingCapacity;
     private boolean open;
     private String eventLocation;
     private ArrayList<String> participantsUIDs;
@@ -34,7 +35,7 @@ public class Event implements Serializable, Parcelable {
         participantsUIDs = new ArrayList<>();
     }
 
-    public Event(String eventName, String eventType, String startTime, String endTime, ArrayList<String> participantsUIDs, String eventLocation, int capacity, String eventId) {
+    public Event(String eventName, String eventType, String startTime, String endTime, ArrayList<String> participantsUIDs, String eventLocation, int capacity, int remainingCapacity, String eventId) {
         this.eventName = eventName;
         this.eventType = eventType;
         this.startTime = startTime;
@@ -42,6 +43,7 @@ public class Event implements Serializable, Parcelable {
         this.participantsUIDs = participantsUIDs;
         this.eventId = eventId;
         this.capacity = capacity;
+        this.remainingCapacity = remainingCapacity;
         this.open = true;
         this.eventLocation = eventLocation;
     }
@@ -50,6 +52,7 @@ public class Event implements Serializable, Parcelable {
         eventName = in.readString();
         eventType = in.readString();
         capacity = in.readInt();
+        remainingCapacity = in.readInt();
         startTime = in.readString();
         endTime = in.readString();
         eventId = in.readString();
@@ -90,9 +93,6 @@ public class Event implements Serializable, Parcelable {
 
 //    public Event(String eventName, String startTime, String endTime, String eventLocation, int capacity, String eventId) {
 //    }
-
-    public Event(String eventName, String eventType, String startTime, String endTime, String eventId, int capacity, boolean bringBakedGoods, String lunchOrBreak) {
-    }
 
     public void setEventLocation(String eventLocation) {
         this.eventLocation = eventLocation;
@@ -162,6 +162,10 @@ public class Event implements Serializable, Parcelable {
         return (capacity - participantsUIDs.size());
     }
 
+    public void setRemainingCapacity(int remainingCapacity){
+        this.remainingCapacity = remainingCapacity;
+    }
+
     public ArrayList<String> getParticipantsUIDs(){ return participantsUIDs; }
 
     public void setParticipantsUIDs(ArrayList<String> participantsUIDs){
@@ -172,6 +176,8 @@ public class Event implements Serializable, Parcelable {
         participantsUIDs.add(uid);
 
     }
+
+    //bring baked goods get and set
 
     @Override
     public String toString() {

@@ -9,7 +9,7 @@ public class Constants {
     public static final String ADMIN_CODE = "abc123";
     public static final String OPEN = "open";
     public static final String EVENTIDS = "eventIDs";
-    public static final String EVENTPACKAGE = "package com.example.ibcompsciia.Models.Event.";
+    public static final String EVENTPACKAGE = "com.example.ibcompsciia.Models.Event.";
 
     public static final String ALUMNI = "Alumni";
     public static final String PARENT = "Parent";
@@ -37,5 +37,5 @@ public class Constants {
     public static final String LOCATION = "Event Location";
     public static final String CAPACITY = "Event Capacity";
 
-    public static final String EVENT_PATH = "Event";
+    public static final String EVENT_PATH = "EventCollection";
 }

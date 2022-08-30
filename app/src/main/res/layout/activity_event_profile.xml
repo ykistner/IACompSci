@@ -72,7 +72,7 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
-        android:id="@+id/EventNameTextView"
+        android:id="@+id/eventProfileName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="100dp"
@@ -83,7 +83,7 @@
         app:layout_constraintVertical_bias="0.25" />
 
     <TextView
-        android:id="@+id/EventTypeTextView"
+        android:id="@+id/eventProfileType"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="28dp"
@@ -96,7 +96,7 @@
         app:layout_constraintVertical_bias="0.369" />
 
     <TextView
-        android:id="@+id/MaxCapacityDataTextView"
+        android:id="@+id/eventProfileCapacity"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="44dp"
@@ -108,7 +108,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/RemainingCapacityDataTextView"
+        android:id="@+id/eventProfileRemaining"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="TextView"
@@ -120,7 +120,7 @@
         app:layout_constraintVertical_bias="0.617" />
 
     <TextView
-        android:id="@+id/BookedUIDsDataTextView"
+        android:id="@+id/eventProfileUID"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="TextView"

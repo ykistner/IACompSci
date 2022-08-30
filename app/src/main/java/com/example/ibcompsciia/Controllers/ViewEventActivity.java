@@ -24,6 +24,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 public class ViewEventActivity extends AppCompatActivity implements RecyclerViewHolder.OnViewClickListener {
@@ -88,7 +89,7 @@ public class ViewEventActivity extends AppCompatActivity implements RecyclerView
 
     @Override
     public void onViewClick(int position) {
-
+        System.out.println("Trying to get: "+eventsList.get(position));
         firestore.collection(Constants.EVENT_PATH).document(eventsList.get(position).getEventId()).get()
                 .addOnCompleteListener(this,
                         (task) -> {
@@ -100,13 +101,15 @@ public class ViewEventActivity extends AppCompatActivity implements RecyclerView
                                 try {
                                     c = Class.forName(Constants.EVENTPACKAGE + eventsList.get(position).getEventType());
                                 } catch (Exception e) {
+                                    System.out.println("POSITION "+eventsList.get(position));
                                     e.printStackTrace();
                                 }
-
+                                System.out.println(task.getResult());
                                 Event event = (Event) task.getResult().toObject(c);
+                                System.out.println("EVENT SENDING = " + event);
 
                                 Intent intent = new Intent(this, EventProfileActivity.class);
-                                intent.putExtra(Constants.EVENT_PATH, (Parcelable) event);
+                                intent.putExtra("id", (Serializable) event);
                                 startActivity(intent);
                             } else {
                                 Log.d(TAG, "Error getting vehicle from the database", task.getException());
