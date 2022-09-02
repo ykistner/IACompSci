@@ -12,6 +12,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.ibcompsciia.Models.Event.BakeSale;
 import com.example.ibcompsciia.Models.Event.Event;
 import com.example.ibcompsciia.R;
 import com.example.ibcompsciia.Utils.Constants;
@@ -54,6 +55,15 @@ public class EventProfileActivity extends AppCompatActivity /*implements View.On
 //        //    String currId = extras.getString("id");
 //        //  System.out.println(extras.getString("id"));
 //
+        Event event = null;
+        if(getIntent().hasExtra("Event")) {
+            event = (Event) getIntent().getSerializableExtra("Event");
+        }
+
+
+
+        System.out.println(event);
+
         mAuth = FirebaseAuth.getInstance();
         firestore = FirebaseFirestore.getInstance();
 
@@ -63,16 +73,11 @@ public class EventProfileActivity extends AppCompatActivity /*implements View.On
         epRemaining = findViewById(R.id.eventProfileRemaining);
         epUID = findViewById(R.id.eventProfileUID);
 
-        Event event = (Event) getIntent().getSerializableExtra("id");
-        CollectionReference abc = firestore.collection("EventCollection");
-        Query query = abc.whereEqualTo("state", "CA");
-
-
 
         epName.setText(event.getEventName());
         epType.setText(event.getEventType());
-        epCapacity.setText(event.getCapacity());
-        epRemaining.setText(event.getRemainingCapacity());
+        epCapacity.setText(""+event.getCapacity());
+        epRemaining.setText(""+event.getRemainingCapacity());
         epUID.setText(event.getEventId());
 
 //        // check to see if there are any extras attached

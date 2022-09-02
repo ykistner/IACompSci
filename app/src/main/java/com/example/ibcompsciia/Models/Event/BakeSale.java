@@ -1,6 +1,8 @@
 package com.example.ibcompsciia.Models.Event;
 
-public class BakeSale extends Event {
+import java.io.Serializable;
+
+public class BakeSale extends Event implements Serializable {
     private boolean bringBakedGoods;
 
     public BakeSale(){

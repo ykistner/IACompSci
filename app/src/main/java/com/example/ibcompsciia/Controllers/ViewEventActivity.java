@@ -13,6 +13,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
+import com.example.ibcompsciia.Models.Event.BakeSale;
 import com.example.ibcompsciia.Utils.Constants;
 import com.example.ibcompsciia.Models.Event.Event;
 import com.example.ibcompsciia.R;
@@ -89,7 +90,6 @@ public class ViewEventActivity extends AppCompatActivity implements RecyclerView
 
     @Override
     public void onViewClick(int position) {
-        System.out.println("Trying to get: "+eventsList.get(position));
         firestore.collection(Constants.EVENT_PATH).document(eventsList.get(position).getEventId()).get()
                 .addOnCompleteListener(this,
                         (task) -> {
@@ -109,7 +109,7 @@ public class ViewEventActivity extends AppCompatActivity implements RecyclerView
                                 System.out.println("EVENT SENDING = " + event);
 
                                 Intent intent = new Intent(this, EventProfileActivity.class);
-                                intent.putExtra("id", (Serializable) event);
+                                intent.putExtra("Event", (Serializable) event);
                                 startActivity(intent);
                             } else {
                                 Log.d(TAG, "Error getting vehicle from the database", task.getException());

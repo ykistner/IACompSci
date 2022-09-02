@@ -45,6 +45,9 @@ public class LoginActivity extends AppCompatActivity {
 
         emailField = findViewById(R.id.editTextEmail);
         passwordField = findViewById(R.id.editTextPassword);
+
+        emailField.setText("ylkistner@gmail.com");
+        passwordField.setText("yuuto123");
     }
 
     public void signIn(View v) {
