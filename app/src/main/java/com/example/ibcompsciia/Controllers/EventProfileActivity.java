@@ -41,7 +41,6 @@ public class EventProfileActivity extends AppCompatActivity /*implements View.On
     private TextView epType;
     private TextView epCapacity;
     private TextView epRemaining;
-    private TextView epUID;
     private Button buttonReserveEvent;
 
 
@@ -71,14 +70,12 @@ public class EventProfileActivity extends AppCompatActivity /*implements View.On
         epType = findViewById(R.id.eventProfileType);
         epCapacity = findViewById(R.id.eventProfileCapacity);
         epRemaining = findViewById(R.id.eventProfileRemaining);
-        epUID = findViewById(R.id.eventProfileUID);
 
 
         epName.setText(event.getEventName());
         epType.setText(event.getEventType());
         epCapacity.setText(""+event.getCapacity());
         epRemaining.setText(""+event.getRemainingCapacity());
-        epUID.setText(event.getEventId());
 
 //        // check to see if there are any extras attached
 //        if (getIntent().hasExtra("selected_event")) {
