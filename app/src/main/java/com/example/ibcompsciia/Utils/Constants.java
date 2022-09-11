@@ -37,6 +37,7 @@ public class Constants {
     public static final String ENDTIME = "Event End Time";
     public static final String LOCATION = "Event Location";
     public static final String CAPACITY = "Event Capacity";
+    public static final String REMAININGCAPACITY = "Event Remaining Capacity";
 
     public static final String EVENT_PATH = "EventCollection";
 }

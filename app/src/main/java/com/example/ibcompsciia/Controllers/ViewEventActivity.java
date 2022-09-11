@@ -52,6 +52,35 @@ public class ViewEventActivity extends AppCompatActivity implements RecyclerView
         context = this;
 
         eventsList = new ArrayList<Event>();
+//        TaskCompletionSource<String> getAllEventsTask = new TaskCompletionSource<>();
+//        firestore.collection(Constants.EVENT_COLLECTION).whereEqualTo("open", true)
+//                .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+//            @Override
+//            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+//                if (task.isSuccessful() && task.getResult() != null) {
+//                    for (QueryDocumentSnapshot document : task.getResult()) {
+//                        eventsList.add(document.toObject(Event.class));
+//                    }
+//                    getAllEventsTask.setResult(null);
+//                } else {
+//                    Log.d("ViewEventActivity", "Error getting documents from db: ", task.getException());
+//                }
+//            }
+//        });
+//        // when all events have been retrieved, update RecyclerView
+//        getAllEventsTask.getTask().addOnCompleteListener(new OnCompleteListener<String>() {
+//            @Override
+//            public void onComplete(@NonNull Task<String> task) {
+//                myAdapter = new RecyclerAdapter(eventsList, ViewEventActivity.this);
+//                vehicleRecView.setAdapter(myAdapter);
+//                vehicleRecView.setLayoutManager(new LinearLayoutManager(ViewEventActivity.this));
+//                System.out.println("TESTING");
+//            }
+//        });
+    }
+
+    public void getEvent(View v) {
+//      eventList.clear();
         TaskCompletionSource<String> getAllEventsTask = new TaskCompletionSource<>();
         firestore.collection(Constants.EVENT_COLLECTION).whereEqualTo("open", true)
                 .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
@@ -78,35 +107,6 @@ public class ViewEventActivity extends AppCompatActivity implements RecyclerView
             }
         });
     }
-
-//    public void getEvent(View v) {
-////      eventList.clear();
-//        TaskCompletionSource<String> getAllEventsTask = new TaskCompletionSource<>();
-//        firestore.collection(Constants.EVENT_COLLECTION).whereEqualTo("open", true)
-//                .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-//            @Override
-//            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-//                if (task.isSuccessful() && task.getResult() != null) {
-//                    for (QueryDocumentSnapshot document : task.getResult()) {
-//                        eventsList.add(document.toObject(Event.class));
-//                    }
-//                    getAllEventsTask.setResult(null);
-//                } else {
-//                    Log.d("ViewEventActivity", "Error getting documents from db: ", task.getException());
-//                }
-//            }
-//        });
-//        // when all events have been retrieved, update RecyclerView
-//        getAllEventsTask.getTask().addOnCompleteListener(new OnCompleteListener<String>() {
-//            @Override
-//            public void onComplete(@NonNull Task<String> task) {
-//                myAdapter = new RecyclerAdapter(eventsList, ViewEventActivity.this);
-//                vehicleRecView.setAdapter(myAdapter);
-//                vehicleRecView.setLayoutManager(new LinearLayoutManager(ViewEventActivity.this));
-//                System.out.println("TESTING");
-//            }
-//        });
-//    }
 
 //    public void gotoUserProfile(View v) {
 //        Intent intent = new Intent(this, UserProfileActivity.class);

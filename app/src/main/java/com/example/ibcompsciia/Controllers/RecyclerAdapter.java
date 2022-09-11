@@ -35,7 +35,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerViewHolder> {
     public void onBindViewHolder(@NonNull RecyclerViewHolder holder, int position) {
         holder.eventNameText(eventList.get(position).getEventName());
         holder.eventStartTimeText(eventList.get(position).getStartTime());
-        holder.eventCapacityText("Capacity: " + eventList.get(position).getCapacity());
+        holder.eventCapacityText("Remaining Capacity: " + eventList.get(position).getRemainingCapacity());
         holder.eventLocationText("Location: " + eventList.get(position).getEventLocation());
     }
 

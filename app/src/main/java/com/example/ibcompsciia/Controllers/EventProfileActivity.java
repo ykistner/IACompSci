@@ -42,19 +42,12 @@ public class EventProfileActivity extends AppCompatActivity /*implements View.On
     private TextView epCapacity;
     private TextView epRemaining;
     private Button buttonReserveEvent;
-    private Button buttonCancelEvent;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_event_profile);
-//
-//        Bundle extras = getIntent().getExtras();
-//
-//        //    String currId = extras.getString("id");
-//        //  System.out.println(extras.getString("id"));
-//
 
         if(getIntent().hasExtra("Event")) {
             selectedEvent = (Event) getIntent().getSerializableExtra("Event");
@@ -83,49 +76,30 @@ public class EventProfileActivity extends AppCompatActivity /*implements View.On
             System.out.println("HAS EXTRA");
             // retrieve the parcel and type case it to a Event object
             selectedEvent = (Event) getIntent().getParcelableExtra("selected_event");
-//
-//            // retrieve the data for the event
-//            eventMaxCapacityDataTextView = findViewById(R.id.MaxCapacityDataTextView);
-//            eventRemainingCapacityDataTextView = findViewById(R.id.RemainingCapacityDataTextView);
-//            bookedUIDs = findViewById(R.id.BookedUIDsDataTextView);
-//            eventNameTextView = findViewById(R.id.EventNameTextView);
-//            eventTypeTextView = findViewById(R.id.EventTypeTextView);
-//
-//            // update the TextViews with the event information
-//            eventMaxCapacityDataTextView.setText(String.valueOf(selectedEvent.getCapacity()));
-//            eventRemainingCapacityDataTextView.setText(String.valueOf(selectedEvent.getRemainingCapacity()));
-//            bookedUIDs.setText(selectedEvent.getParticipantsUIDs().toString());
-//            eventNameTextView.setText(selectedEvent.getEventName());
-//            eventTypeTextView.setText(selectedEvent.getEventType());
         }
-//
-//        // find the button and attach a listener
-//        buttonReserveEvent = findViewById(R.id.buttonReserveEvent);
-//        buttonReserveEvent.setOnClickListener(this);
     }
 
     public void bookEvent() {
         System.out.println("BOOK EVENT");
         System.out.println(selectedEvent.getRemainingCapacity());
         //close event if user took last seat available
-        if (selectedEvent.getRemainingCapacity() == 1) {
-            firestore.collection("events").document(selectedEvent.getEventId())
+        if (selectedEvent.getRemainingCapacity() < 1) {
+            firestore.collection(Constants.EVENT_PATH).document(selectedEvent.getEventId())
                     .update("open", false);
         }
 
         // update capacity
-        firestore.collection("events").document(selectedEvent.getEventId())
+        firestore.collection(Constants.EVENT_PATH).document(selectedEvent.getEventId())
                 .update("remainingCapacity", selectedEvent.getRemainingCapacity() - 1);
 
         // add user's uid to the list of reservedUids
         selectedEvent.addReservedUid(mAuth.getUid());
-        firestore.collection("events").document(selectedEvent.getEventId())
+        firestore.collection(Constants.EVENT_PATH).document(selectedEvent.getEventId())
                 .update("reservedUids", selectedEvent.getParticipantsUIDs())
                 .addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
                         // go back to ViewEventActivity
-                        Toast.makeText(EventProfileActivity.this,Constants.BOOK_EVENT_SUCCESS, Toast.LENGTH_LONG).show();
                         Intent intent = new Intent(getApplicationContext(), ViewEventActivity.class);
                         startActivity(intent);
                         finish();
@@ -136,7 +110,48 @@ public class EventProfileActivity extends AppCompatActivity /*implements View.On
     }
 
 
+    public void decrementCapacity() {
+        firestore.collection(Constants.EVENT_PATH).document(selectedEvent.getEventId()).get()
+                .addOnCompleteListener(
+                        (task) -> {
+                            if(task.getResult() == null) {
+                            }
+                            else if(task.isSuccessful()) {
+
+                                try {
+                                    int remainingCapacity = task.getResult().get(Constants.REMAININGCAPACITY, Integer.class);
+                                    remainingCapacity--;
+                                    selectedEvent.setRemainingCapacity(remainingCapacity);
+                                    epRemaining.setText("Remaining Capacity: "+ remainingCapacity);
+                                    firestore.collection(Constants.EVENT_PATH).document(selectedEvent.getEventId()).update(Constants.REMAININGCAPACITY, remainingCapacity);
+
+                                    if(remainingCapacity == 0) {
+                                        firestore.collection(Constants.EVENT_PATH).document(selectedEvent.getEventId()).update(Constants.OPEN, false);
+                                    }
+                                }
+                                catch(Exception e) {
+                                    e.printStackTrace();
+                                }
+
+                            }
+                            else{
+                                task.getException().printStackTrace();
+                                Toast.makeText(this, "Error booking event", Toast.LENGTH_SHORT).show();
+                            }
+                        });
+    }
+
     public void onClick(View v) {
-        bookEvent();
+        try {
+            bookEvent();
+            decrementCapacity();
+            Toast.makeText(this, "Booked Successfully", Toast.LENGTH_SHORT).show();
+            buttonReserveEvent.setEnabled(false);
+            buttonReserveEvent.setText("Booked");
+        }
+        catch (Exception e) {
+            Toast.makeText(this, "Error booking vehicle", Toast.LENGTH_SHORT).show();
+            e.printStackTrace();
+        }
     }
 }
