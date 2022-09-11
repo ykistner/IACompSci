@@ -55,14 +55,14 @@ public class EventProfileActivity extends AppCompatActivity /*implements View.On
 //        //    String currId = extras.getString("id");
 //        //  System.out.println(extras.getString("id"));
 //
-        Event event = null;
+
         if(getIntent().hasExtra("Event")) {
-            event = (Event) getIntent().getSerializableExtra("Event");
+            selectedEvent = (Event) getIntent().getSerializableExtra("Event");
         }
 
 
 
-        System.out.println(event);
+        System.out.println(selectedEvent);
 
         mAuth = FirebaseAuth.getInstance();
         firestore = FirebaseFirestore.getInstance();
@@ -73,16 +73,16 @@ public class EventProfileActivity extends AppCompatActivity /*implements View.On
         epRemaining = findViewById(R.id.eventProfileRemaining);
 
 
-        epName.setText(event.getEventName());
-        epType.setText(event.getEventType());
-        epCapacity.setText(""+event.getCapacity());
-        epRemaining.setText(""+event.getRemainingCapacity());
+        epName.setText(selectedEvent.getEventName());
+        epType.setText(selectedEvent.getEventType());
+        epCapacity.setText(""+selectedEvent.getCapacity());
+        epRemaining.setText(""+selectedEvent.getRemainingCapacity());
 
-//        // check to see if there are any extras attached
-//        if (getIntent().hasExtra("selected_event")) {
-//            System.out.println("HAS EXTRA");
-//            // retrieve the parcel and type case it to a Event object
-//            selectedEvent = (Event) getIntent().getParcelableExtra("selected_event");
+        // check to see if there are any extras attached
+        if (getIntent().hasExtra("selected_event")) {
+            System.out.println("HAS EXTRA");
+            // retrieve the parcel and type case it to a Event object
+            selectedEvent = (Event) getIntent().getParcelableExtra("selected_event");
 //
 //            // retrieve the data for the event
 //            eventMaxCapacityDataTextView = findViewById(R.id.MaxCapacityDataTextView);
@@ -97,7 +97,7 @@ public class EventProfileActivity extends AppCompatActivity /*implements View.On
 //            bookedUIDs.setText(selectedEvent.getParticipantsUIDs().toString());
 //            eventNameTextView.setText(selectedEvent.getEventName());
 //            eventTypeTextView.setText(selectedEvent.getEventType());
-//        }
+        }
 //
 //        // find the button and attach a listener
 //        buttonReserveEvent = findViewById(R.id.buttonReserveEvent);
@@ -125,6 +125,7 @@ public class EventProfileActivity extends AppCompatActivity /*implements View.On
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
                         // go back to ViewEventActivity
+                        Toast.makeText(EventProfileActivity.this,Constants.BOOK_EVENT_SUCCESS, Toast.LENGTH_LONG).show();
                         Intent intent = new Intent(getApplicationContext(), ViewEventActivity.class);
                         startActivity(intent);
                         finish();

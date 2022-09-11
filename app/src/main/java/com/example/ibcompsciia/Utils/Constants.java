@@ -25,6 +25,7 @@ public class Constants {
     public static String SIGN_IN_SUCCESS = "signInWithEmail:success";
     public static String SIGN_IN_FAILURE = "signInWithEmail:failure";
     public static String SIGN_IN_FAILURE_TOAST = "Authentication failed.";
+    public static String BOOK_EVENT_SUCCESS = "Successfully booked a spot for the event";
 
     public static final String BAKED = "Baked Goods That Are Needed";
     public static final String TOPIC = "Topic";
