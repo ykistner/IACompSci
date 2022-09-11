@@ -61,6 +61,20 @@ public class Event implements Serializable, Parcelable {
         participantsUIDs = in.createStringArrayList();
     }
 
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(eventName);
+        dest.writeString(eventType);
+        dest.writeInt(capacity);
+        dest.writeInt(remainingCapacity);
+        dest.writeString(startTime);
+        dest.writeString(endTime);
+        dest.writeString(eventId);
+        dest.writeByte((byte) (open ? 1 : 0));
+        dest.writeString(eventLocation);
+//        dest.writeString(participantsUIDs);
+    }
+
     public static final Creator<Event> CREATOR = new Creator<Event>() {
         @Override
         public Event createFromParcel(Parcel in) {
@@ -197,14 +211,4 @@ public class Event implements Serializable, Parcelable {
         return 0;
     }
 
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(eventName);
-        dest.writeString(eventType);
-        dest.writeInt(capacity);
-        dest.writeString(startTime);
-        dest.writeString(endTime);
-        dest.writeString(eventId);
-        dest.writeByte((byte) (open ? 1 : 0));
-    }
 }

@@ -42,6 +42,7 @@ public class EventProfileActivity extends AppCompatActivity /*implements View.On
     private TextView epCapacity;
     private TextView epRemaining;
     private Button buttonReserveEvent;
+    private Button buttonCancelEvent;
 
 
     @Override
@@ -103,47 +104,38 @@ public class EventProfileActivity extends AppCompatActivity /*implements View.On
 //        buttonReserveEvent.setOnClickListener(this);
     }
 
-//    public void bookEvent() {
-//        System.out.println("BOOK EVENT");
-//        System.out.println(selectedEvent.getRemainingCapacity());
-//        //close event if user took last seat available
-//        if (selectedEvent.getRemainingCapacity() == 1) {
-//            firestore.collection("events").document(selectedEvent.getEventId())
-//                    .update("open", false);
-//        }
-//
-//        // update capacity
-//        firestore.collection("events").document(selectedEvent.getEventId())
-//                .update("remainingCapacity", selectedEvent.getRemainingCapacity() - 1);
-//
-//        // add user's uid to the list of reservedUids
-//        selectedEvent.addReservedUid(mAuth.getUid());
-//        firestore.collection("events").document(selectedEvent.getEventId())
-//                .update("reservedUids", selectedEvent.getParticipantsUIDs())
-//                .addOnCompleteListener(new OnCompleteListener<Void>() {
-//                    @Override
-//                    public void onComplete(@NonNull Task<Void> task) {
-//                        // go back to ViewEventActivity
-//                        Intent intent = new Intent(getApplicationContext(), ViewEventActivity.class);
-//                        startActivity(intent);
-//                        finish();
-//                    }
-//                });
-//        // right here
-//        System.out.println("EVENTS UIDS" + selectedEvent.getParticipantsUIDs());
-//    }
-//    //
+    public void bookEvent() {
+        System.out.println("BOOK EVENT");
+        System.out.println(selectedEvent.getRemainingCapacity());
+        //close event if user took last seat available
+        if (selectedEvent.getRemainingCapacity() == 1) {
+            firestore.collection("events").document(selectedEvent.getEventId())
+                    .update("open", false);
+        }
 
-//    @Override
-//    public void onClick(View v) {
-//        int i = v.getId();
-//        if (i == buttonReserveEvent.getId()) {
-//            bookEvent();
-//        }
-//        /*
-//        else if(i == buttonCancelEvent.getID()) {
-//            cancelEvent();
-//        }
-//        */
-//    }
+        // update capacity
+        firestore.collection("events").document(selectedEvent.getEventId())
+                .update("remainingCapacity", selectedEvent.getRemainingCapacity() - 1);
+
+        // add user's uid to the list of reservedUids
+        selectedEvent.addReservedUid(mAuth.getUid());
+        firestore.collection("events").document(selectedEvent.getEventId())
+                .update("reservedUids", selectedEvent.getParticipantsUIDs())
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        // go back to ViewEventActivity
+                        Intent intent = new Intent(getApplicationContext(), ViewEventActivity.class);
+                        startActivity(intent);
+                        finish();
+                    }
+                });
+        // right here
+        System.out.println("EVENTS UIDS" + selectedEvent.getParticipantsUIDs());
+    }
+
+
+    public void onClick(View v) {
+        bookEvent();
+    }
 }
