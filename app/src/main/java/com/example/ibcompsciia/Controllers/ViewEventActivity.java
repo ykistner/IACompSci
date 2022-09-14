@@ -52,6 +52,7 @@ public class ViewEventActivity extends AppCompatActivity implements RecyclerView
         context = this;
 
         eventsList = new ArrayList<Event>();
+        getEvent();
 //        TaskCompletionSource<String> getAllEventsTask = new TaskCompletionSource<>();
 //        firestore.collection(Constants.EVENT_COLLECTION).whereEqualTo("open", true)
 //                .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
@@ -79,8 +80,10 @@ public class ViewEventActivity extends AppCompatActivity implements RecyclerView
 //        });
     }
 
-    public void getEvent(View v) {
-//      eventList.clear();
+    public void getEvent() {
+        eventsList.clear();
+
+
         TaskCompletionSource<String> getAllEventsTask = new TaskCompletionSource<>();
         firestore.collection(Constants.EVENT_COLLECTION).whereEqualTo("open", true)
                 .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
@@ -101,6 +104,7 @@ public class ViewEventActivity extends AppCompatActivity implements RecyclerView
             @Override
             public void onComplete(@NonNull Task<String> task) {
                 myAdapter = new RecyclerAdapter(eventsList, ViewEventActivity.this);
+                //myAdapter.clearContent();
                 vehicleRecView.setAdapter(myAdapter);
                 vehicleRecView.setLayoutManager(new LinearLayoutManager(ViewEventActivity.this));
                 System.out.println("TESTING");

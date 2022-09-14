@@ -22,6 +22,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.storage.FirebaseStorage;
@@ -88,10 +89,13 @@ public class EventProfileActivity extends AppCompatActivity /*implements View.On
                     .update("open", false);
         }
 
+        System.out.println("UYWGFUWFGIW" + selectedEvent.getRemainingCapacity());
+
         // update capacity
         firestore.collection(Constants.EVENT_PATH).document(selectedEvent.getEventId())
                 .update("remainingCapacity", selectedEvent.getRemainingCapacity() - 1);
 
+        selectedEvent.setRemainingCapacity(selectedEvent.getRemainingCapacity()-1);
         // add user's uid to the list of reservedUids
         selectedEvent.addReservedUid(mAuth.getUid());
         firestore.collection(Constants.EVENT_PATH).document(selectedEvent.getEventId())
@@ -111,6 +115,9 @@ public class EventProfileActivity extends AppCompatActivity /*implements View.On
 
 
     public void decrementCapacity() {
+
+        firestore.collection(Constants.EVENT_PATH).document(selectedEvent.getEventId()).update(Constants.REMAININGCAPACITY, FieldValue.increment(-1));
+
         firestore.collection(Constants.EVENT_PATH).document(selectedEvent.getEventId()).get()
                 .addOnCompleteListener(
                         (task) -> {
@@ -119,13 +126,17 @@ public class EventProfileActivity extends AppCompatActivity /*implements View.On
                             else if(task.isSuccessful()) {
 
                                 try {
-                                    int remainingCapacity = task.getResult().get(Constants.REMAININGCAPACITY, Integer.class);
-                                    remainingCapacity--;
-                                    selectedEvent.setRemainingCapacity(remainingCapacity);
-                                    epRemaining.setText("Remaining Capacity: "+ remainingCapacity);
-                                    firestore.collection(Constants.EVENT_PATH).document(selectedEvent.getEventId()).update(Constants.REMAININGCAPACITY, remainingCapacity);
+                                    System.out.println("weifbweufi: "+selectedEvent.getRemainingCapacity());
+                                    System.out.println("BADYIB: " + Constants.REMAININGCAPACITY);
+                                    System.out.println("INTEGER" + Integer.class);
+                                    //int remainingCapacity = task.getResult().get(Constants.REMAININGCAPACITY, Integer.class);
+                                    //System.out.println("HERE LOOK:"+remainingCapacity);
+//                                    remainingCapacity--;
+                                    //selectedEvent.setRemainingCapacity(remainingCapacity);
+                                    epRemaining.setText("Remaining Capacity: "+ selectedEvent.getRemainingCapacity());
+                                    //firestore.collection(Constants.EVENT_PATH).document(selectedEvent.getEventId()).update(Constants.REMAININGCAPACITY, remainingCapacity);
 
-                                    if(remainingCapacity == 0) {
+                                    if(selectedEvent.getRemainingCapacity() == 0) {
                                         firestore.collection(Constants.EVENT_PATH).document(selectedEvent.getEventId()).update(Constants.OPEN, false);
                                     }
                                 }
@@ -146,8 +157,6 @@ public class EventProfileActivity extends AppCompatActivity /*implements View.On
             bookEvent();
             decrementCapacity();
             Toast.makeText(this, "Booked Successfully", Toast.LENGTH_SHORT).show();
-            buttonReserveEvent.setEnabled(false);
-            buttonReserveEvent.setText("Booked");
         }
         catch (Exception e) {
             Toast.makeText(this, "Error booking vehicle", Toast.LENGTH_SHORT).show();

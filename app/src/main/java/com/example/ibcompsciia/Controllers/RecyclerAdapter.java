@@ -47,4 +47,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerViewHolder> {
     public interface OnViewClickListener {
         void onViewClick(int position);
     }
+
+    public void clearContent(){ eventList.clear();
+    }
 }

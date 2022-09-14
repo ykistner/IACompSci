@@ -12,6 +12,7 @@ import android.widget.EditText;
 import com.example.ibcompsciia.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.gms.tasks.TaskCompletionSource;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -79,6 +80,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void updateUI(FirebaseUser currentUser) {
+
         if (currentUser != null) {
             Intent intent = new Intent(this, NavigationActivity.class);
             startActivity(intent);
