@@ -8,7 +8,6 @@ public class BakeSale extends Event implements Serializable {
     public BakeSale(){
         this.bringBakedGoods = bringBakedGoods;
     }
-
     public BakeSale(String eventNameString, String eventStartString, String eventEndString, String eventLocation, int eventCapacity, String eventId) {
         super(eventNameString, "BakeSale", eventStartString, eventEndString, eventLocation, eventCapacity, eventId);
         this.bringBakedGoods = true;

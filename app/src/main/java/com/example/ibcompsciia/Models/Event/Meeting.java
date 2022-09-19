@@ -5,6 +5,13 @@ public class Meeting extends Event {
     private String topic;
     private String organizer;
 
+    public Meeting(){
+        this.mandatory = mandatory;
+        this.topic = topic;
+        this.organizer = organizer;
+    }
+
+
     public Meeting(String eventName, String eventType, String startTime, String endTime, int capacity, String topic, String organizer, String eventId) {
         super(eventName, "Meeting", startTime, eventType, endTime, capacity, eventId);
         this.mandatory = mandatory;

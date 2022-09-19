@@ -2,14 +2,13 @@ package com.example.ibcompsciia.Models.Event;
 
 public class VolunteerWork extends Event {
     private boolean mandatory;
-
-    public VolunteerWork(String eventName, String eventType, String startTime, String endTime, String eventId, int capacity, boolean mandatory) {
-        super(eventName, eventType, startTime, endTime, eventId, capacity);
+    
+    public VolunteerWork(){
         this.mandatory = mandatory;
     }
 
-    public VolunteerWork(String eventNameString, String eventStartString, String eventEndString, String eventLocation, int eventCapacity, String causeString, String eventId) {
-        super(eventNameString, eventStartString, eventEndString, eventLocation, eventCapacity, eventId, causeString);
+    public VolunteerWork(String eventNameString, String eventStartString, String eventEndString, String eventLocation, int eventCapacity, String eventId) {
+        super(eventNameString, "VolunteerWork", eventStartString, eventEndString, eventLocation, eventCapacity, eventId);
     }
 
     public boolean isMandatory() {

@@ -30,7 +30,6 @@ public class AddEventActivity extends AppCompatActivity {
     private LinearLayout layout;
     private Spinner userRoleSpinner;
     private String selectedRole;
-    private static int uidGenerator = 1;
     private EditText eventNameField;
     private EditText eventStartField;
     private EditText eventEndField;
@@ -39,7 +38,6 @@ public class AddEventActivity extends AppCompatActivity {
     private EditText requiredBakedGoods;
     private EditText organizer;
     private EditText topic;
-    private EditText cause;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -101,11 +99,6 @@ public class AddEventActivity extends AppCompatActivity {
             organizer.setHint(Constants.ORGANIZER);
             layout.addView(organizer);
         }
-        if (selectedRole.equals(Constants.VOLUNTEER)) {
-            cause = new EditText(this);
-            cause.setHint(Constants.CAUSE);
-            layout.addView(cause);
-        }
     }
 
     private void commonFields() {
@@ -163,10 +156,8 @@ public class AddEventActivity extends AppCompatActivity {
             String organizerString = new String(organizer.getText().toString());
             newEvent = new Presentation(eventNameString, eventStartString, eventEndString, eventLocation, eventCapacity, topicString, organizerString, eventId);
         } else if (selectedRole.equals(Constants.VOLUNTEER)) {
-            String causeString = new String(cause.getText().toString());
-            newEvent = new VolunteerWork(eventNameString, eventStartString, eventEndString, eventLocation, eventCapacity, causeString, eventId);
+            newEvent = new VolunteerWork(eventNameString, eventStartString, eventEndString, eventLocation, eventCapacity, eventId);
         } else {
-            newEvent = new Event(eventNameString, eventStartString, eventEndString, eventLocation, eventCapacity, cause, eventId);
         }
         System.out.println(newEvent);
         //add the new event to the database

@@ -18,6 +18,8 @@ public class Constants {
     public static final String ADMIN = "Admin";
     public static final String USER_COLLECTION = "Users";
 
+    public static final String NOTHING = "N/A";
+
     public static final String SIGN_UP = "Sign Up";
     public static String SIGN_UP_SUCCESS = "Successfully signed up the user";
     public static String SIGN_UP_FAILURE = "CreateUserWithEmail:failure";

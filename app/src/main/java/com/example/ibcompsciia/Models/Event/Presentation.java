@@ -3,13 +3,13 @@ package com.example.ibcompsciia.Models.Event;
 public class Presentation extends Event {
     private int gradeLevel;
 
-    public Presentation(String eventName, String startTime, String endTime, String eventLocation, String eventId, int capacity, String topic, String organizer, int gradeLevel) {
-        super(eventName, startTime, endTime, eventId, eventLocation, capacity);
+    public Presentation(){
         this.gradeLevel = gradeLevel;
     }
 
     public Presentation(String eventNameString, String eventStartString, String eventEndString, String eventLocation, int eventCapacity, String topic, String organizer, String eventId) {
         super(eventNameString, "Presentation", eventStartString, eventEndString, eventLocation, eventCapacity, eventId);
+        this.gradeLevel = gradeLevel;
     }
 
     public int getGradeLevel() {

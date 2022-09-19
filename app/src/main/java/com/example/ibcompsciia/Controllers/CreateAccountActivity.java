@@ -92,7 +92,7 @@ public class CreateAccountActivity extends AppCompatActivity {
             gradYearField.setHint("Graduation year");
             layout.addView(gradYearField);
         }
-        if(selectedRole.equals("Student")){
+        if (selectedRole.equals("Student")) {
             graduatingYearField = new EditText(this);
             graduatingYearField.setHint("Graduating Year");
             layout.addView(graduatingYearField);
@@ -102,12 +102,12 @@ public class CreateAccountActivity extends AppCompatActivity {
             adminCodeField.setHint("Admin Code");
             layout.addView(adminCodeField);
         }
-        if(selectedRole.equals("Teacher")){
+        if (selectedRole.equals("Teacher")) {
             textInSchoolTitle = new EditText(this);
             textInSchoolTitle.setHint("In School Title");
             layout.addView(textInSchoolTitle);
         }
-        if(selectedRole.equals("Parent")){
+        if (selectedRole.equals("Parent")) {
             textChildrenUIDs = new EditText(this);
             textChildrenUIDs.setHint("Children User ID");
             layout.addView(textChildrenUIDs);
@@ -137,7 +137,7 @@ public class CreateAccountActivity extends AppCompatActivity {
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
-                        if(task.isSuccessful()) {
+                        if (task.isSuccessful()) {
                             //saveUser(emailString,passwordString,nameString);
                             Log.d(Constants.SIGN_UP, Constants.SIGN_UP_SUCCESS);
                             FirebaseUser user = mAuth.getCurrentUser();
@@ -146,10 +146,9 @@ public class CreateAccountActivity extends AppCompatActivity {
                             mUser = mAuth.getCurrentUser();
                             uid = mUser.getUid();
                             addUserToDatabase(emailString);
-                        }
-                        else {
+                        } else {
                             Log.d(Constants.SIGN_UP, Constants.SIGN_UP_FAILURE, task.getException());
-                            Toast.makeText(CreateAccountActivity.this,Constants.SIGN_UP_FAILURE_TOAST, Toast.LENGTH_LONG).show();
+                            Toast.makeText(CreateAccountActivity.this, Constants.SIGN_UP_FAILURE_TOAST, Toast.LENGTH_LONG).show();
                             updateUI(null);
                         }
                     }
@@ -157,29 +156,29 @@ public class CreateAccountActivity extends AppCompatActivity {
     }
 
     public void addUserToDatabase(String emailString) {
-        if(selectedRole.equals(Constants.ALUMNI)) {
+        if (selectedRole.equals(Constants.ALUMNI)) {
             int gradYearInt = Integer.parseInt(gradYearField.getText().toString());
             Alumni newUser = new Alumni(uid, nameString, emailString, "Alumni", 10, gradYearInt);
             //add the new user to the database
             firestore.collection(Constants.USER_COLLECTION).document(uid).set(newUser);
         }
-        if(selectedRole.equals(Constants.TEACHER)) {
+        if (selectedRole.equals(Constants.TEACHER)) {
             String inSchoolTitle = textInSchoolTitle.getText().toString();
             Teacher newUser = new Teacher(uid, nameString, emailString, "Teacher", 10, inSchoolTitle);
             //add the new user to the database
             firestore.collection(Constants.USER_COLLECTION).document(uid).set(newUser);
         }
-        if(selectedRole.equals(Constants.ADMIN)){
+        if (selectedRole.equals(Constants.ADMIN)) {
             String adminCodeString = adminCodeField.getText().toString();
             Admin newUser = new Admin(uid, nameString, emailString, "Admin", 10, adminCodeString);
             firestore.collection(Constants.USER_COLLECTION).document(uid).set(newUser);
         }
-        if(selectedRole.equals(Constants.PARENT)){
+        if (selectedRole.equals(Constants.PARENT)) {
             ArrayList<String> childrenUIDs = new ArrayList<>();
             String childrenUID = textChildrenUIDs.getText().toString();
             childrenUIDs.add(childrenUID);
         }
-        if(selectedRole.equals(Constants.STUDENT)){
+        if (selectedRole.equals(Constants.STUDENT)) {
             int graduatingYearInt = Integer.parseInt(graduatingYearField.getText().toString());
             Student newUser = new Student(uid, nameString, emailString, "Student", 10, graduatingYearInt, null);
         }

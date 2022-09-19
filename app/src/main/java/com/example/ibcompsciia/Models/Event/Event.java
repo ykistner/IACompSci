@@ -4,6 +4,8 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.widget.EditText;
 
+import com.example.ibcompsciia.Utils.Constants;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 
@@ -20,6 +22,16 @@ public class Event implements Serializable, Parcelable {
     private ArrayList<String> participantsUIDs;
 
     public Event(){
+        this.eventName = Constants.NOTHING; //contsants make all "n/a"
+        this.eventType = Constants.NOTHING;
+        this.startTime = Constants.NOTHING;
+        this.endTime = Constants.NOTHING;
+        this.eventId = Constants.NOTHING;
+        this.capacity = 0;
+        this.open = true;
+        this.eventLocation = Constants.NOTHING;
+
+        participantsUIDs = new ArrayList<>();
     }
 
     public Event(String eventName, String eventType, String startTime, String endTime, String eventLocation, int capacity, String eventId) {
@@ -29,23 +41,11 @@ public class Event implements Serializable, Parcelable {
         this.endTime = endTime;
         this.eventId = eventId;
         this.capacity = capacity;
+        this.remainingCapacity = capacity;
         this.open = true;
         this.eventLocation = eventLocation;
 
         participantsUIDs = new ArrayList<>();
-    }
-
-    public Event(String eventName, String eventType, String startTime, String endTime, ArrayList<String> participantsUIDs, String eventLocation, int capacity, int remainingCapacity, String eventId) {
-        this.eventName = eventName;
-        this.eventType = eventType;
-        this.startTime = startTime;
-        this.endTime = endTime;
-        this.participantsUIDs = participantsUIDs;
-        this.eventId = eventId;
-        this.capacity = capacity;
-        this.remainingCapacity = remainingCapacity;
-        this.open = true;
-        this.eventLocation = eventLocation;
     }
 
     protected Event(Parcel in) {
@@ -72,7 +72,7 @@ public class Event implements Serializable, Parcelable {
         dest.writeString(eventId);
         dest.writeByte((byte) (open ? 1 : 0));
         dest.writeString(eventLocation);
-//        dest.writeString(participantsUIDs);
+        dest.writeStringList(participantsUIDs);
     }
 
     public static final Creator<Event> CREATOR = new Creator<Event>() {
@@ -86,27 +86,6 @@ public class Event implements Serializable, Parcelable {
             return new Event[size];
         }
     };
-
-    public Event(String eventNameString, String eventStartString, String eventEndString, String eventLocation, int eventCapacity, String topic, String organizer, String eventId) {
-    }
-
-    public Event(String eventName, String eventType, String startTime, String endTime, String eventId, int capacity) {
-    }
-
-    public Event(String eventNameString, String eventStartString, String eventEndString, String eventLocation, int eventCapacity, String requiredBakedGoodsString, String eventId) {
-    }
-
-    public Event(String eventNameString, String eventStartString, String eventEndString, String eventLocation, String eventCapacity, String cause, String eventId) {
-    }
-
-    public Event(EditText eventNameField, EditText eventStartField, EditText eventEndField, EditText eventCapacityField, EditText eventLocationField, EditText cause) {
-    }
-
-    public Event(String eventNameString, String eventStartString, String eventEndString, String eventLocation, int eventCapacity, EditText cause, String eventId) {
-    }
-
-//    public Event(String eventName, String startTime, String endTime, String eventLocation, int capacity, String eventId) {
-//    }
 
     public void setEventLocation(String eventLocation) {
         this.eventLocation = eventLocation;
@@ -173,7 +152,7 @@ public class Event implements Serializable, Parcelable {
     }
 
     public int getRemainingCapacity(){
-        return (capacity - participantsUIDs.size());
+        return remainingCapacity;
     }
 
     public void setRemainingCapacity(int remainingCapacity){
