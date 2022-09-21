@@ -7,8 +7,14 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.example.ibcompsciia.R;
+import com.example.ibcompsciia.Utils.Constants;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 public class NavigationActivity extends AppCompatActivity {
+
+    private FirebaseAuth mAuth;
+    private FirebaseFirestore firestore;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,4 +41,6 @@ public class NavigationActivity extends AppCompatActivity {
         Intent nextScreen = new Intent(getBaseContext(), AddEventActivity.class);
         startActivity(nextScreen);
     }
+
+
 }

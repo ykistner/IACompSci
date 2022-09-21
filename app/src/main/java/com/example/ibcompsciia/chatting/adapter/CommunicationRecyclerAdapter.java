@@ -112,8 +112,8 @@ public class CommunicationRecyclerAdapter extends RecyclerView.Adapter<Communica
             database.child("login").child(dataCommunication.getKey()).addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        String srcImage = dataSnapshot.child("image").getValue(String.class);
-                        Glide.with(context).load(srcImage).placeholder(R.drawable.profile).into(imageView);
+                    String srcImage = dataSnapshot.child("image").getValue(String.class);
+                    Glide.with(context).load(srcImage).placeholder(R.drawable.profile).into(imageView);
                 }
 
                 @Override

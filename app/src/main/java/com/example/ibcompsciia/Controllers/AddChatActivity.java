@@ -30,14 +30,14 @@ import java.util.Locale;
 
 public class AddChatActivity extends AppCompatActivity {
 
-    EditText sendMessage;
-    FloatingActionButton fab_send;
-    DatabaseReference database = FirebaseDatabase.getInstance().getReference();
-    ArrayList<dataCommunication> listCommunication = new ArrayList<>();
-    ArrayList<String> listData = new ArrayList<>();
-    RecyclerView recyclerView;
-    CommunicationRecyclerAdapter communicationRecyclerAdapter;
-    Context context;
+    private EditText sendMessage;
+    private FloatingActionButton fab_send;
+    private DatabaseReference database = FirebaseDatabase.getInstance().getReference();
+    private ArrayList<dataCommunication> listCommunication = new ArrayList<>();
+    private ArrayList<String> listData = new ArrayList<>();
+    private RecyclerView recyclerView;
+    private CommunicationRecyclerAdapter communicationRecyclerAdapter;
+    private Context context;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

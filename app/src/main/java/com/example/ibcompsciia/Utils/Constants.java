@@ -1,5 +1,7 @@
 package com.example.ibcompsciia.Utils;
 
+import com.example.ibcompsciia.Models.User.User;
+
 public class Constants {
     public static final String PRESENTATION = "Presentation";
     public static final String VOLUNTEER = "VolunteerWork";
@@ -10,6 +12,7 @@ public class Constants {
     public static final String OPEN = "open";
     public static final String EVENTIDS = "eventIDs";
     public static final String EVENTPACKAGE = "com.example.ibcompsciia.Models.Event.";
+
 
     public static final String ALUMNI = "Alumni";
     public static final String PARENT = "Parent";
